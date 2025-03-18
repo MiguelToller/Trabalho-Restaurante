@@ -68,7 +68,8 @@ O pedido é registrado no sistema e não pode mais ser alterado.
 1. O cliente acessa a opção de "Confirmar Pedido".  
 2. O sistema exibe um resumo do carrinho.  
 3. O cliente confirma o pedido.  
-4. O sistema registra o pedido como definitivo.  
+4. O sistema registra o pedido como definitivo.
+5. [Include] Emitir Ticket: O sistema emite o ticket com todos os itens no pedido e o valor total a pagar.
 
 ### **Branch-sequence**  
 - Se o cliente quiser voltar atrás antes de confirmar, ele pode cancelar a ação.  
