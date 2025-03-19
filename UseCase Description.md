@@ -82,7 +82,7 @@ Após a confirmação, o pedido não pode mais ser alterado, apenas cancelado ou
 
 ---
 
-## **4. Solicitar Conta (Encerrar Pedido)**  
+## **4. Pedir Conta (Encerrar Pedido)**  
 
 ### **Ator**  
 Cliente  
@@ -104,7 +104,10 @@ O pedido é finalizado e o pagamento pode ser processado.
 - Se o cliente desejar revisar o valor antes do pagamento, ele pode visualizar o resumo da conta antes de prosseguir.
 
 ### **Exception-sequence**  
-- Se o pagamento não for concluído, o sistema mantém o pedido pendente até a quitação.  
+- Se o pagamento não for concluído, o sistema mantém o pedido pendente até a quitação.
+  
+### **Nota**  
+Após a confirmação, Adicionar 10% ao valor total para o garçom. O cliente pode ou não pagar esses 10%.  
 
 ---
 
