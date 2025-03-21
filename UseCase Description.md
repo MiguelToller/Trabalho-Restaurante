@@ -111,7 +111,7 @@ Após a confirmação, Adicionar 10% ao valor total para o garçom. O cliente po
 
 ---
 
-## **5. Adicionar Itens ao Menu**  
+## **5. Cadastrar Itens**  
 
 ### **Ator**  
 Administrador/Gerente  
@@ -124,7 +124,7 @@ O novo item é adicionado ao menu e fica disponível para os clientes.
 
 ### **Base-sequence**  
 1. O administrador acessa a opção de gerenciar o menu.  
-2. O administrador seleciona "Adicionar Item".  
+2. O administrador seleciona "Cadastrar Item".  
 3. O sistema solicita informações do novo item (nome, descrição, preço, etc.).  
 4. O administrador insere os dados e confirma.  
 5. O sistema adiciona o novo item ao menu.  
@@ -134,7 +134,7 @@ O novo item é adicionado ao menu e fica disponível para os clientes.
 
 ---
 
-## **6. Ajustar Itens do Menu**  
+## **6. Alterar Itens**  
 
 ### **Ator**  
 Administrador/Gerente  
@@ -158,10 +158,10 @@ As informações do item são atualizadas no menu.
 
 ---
 
-## **7. Ativar/Desativar Itens do Menu**  
+## **7. Ativar/Desativar Itens**
 
 ### **Ator**  
-Administrador/Gerente  
+Administrador/Gerente 
 
 ### **Pré-condição**  
 O sistema deve ter pelo menos um item cadastrado no menu.  
