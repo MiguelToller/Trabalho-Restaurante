@@ -67,7 +67,7 @@ public class ItemDAO {
     }
     
     public Item getItemPorNome(String nome) {
-        String sql = "SELECT nome, categoria, preco, status, qtdEstoque, imagem FROM Item WHERE nome = ?";
+        String sql = "SELECT id, nome, categoria, preco, status, qtdEstoque, imagem FROM Item WHERE nome = ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, nome);
@@ -75,6 +75,7 @@ public class ItemDAO {
             
             if (rs.next()) {
                 Item item = new Item();
+                item.setId(rs.getInt("id"));
                 item.setNome(rs.getString("nome"));
                 item.setCategoria(rs.getString("categoria"));
                 item.setPreco(rs.getDouble("preco"));
@@ -116,12 +117,17 @@ public class ItemDAO {
     
     public void editarItem(Item item) {
         try {
-            String sql = "UPDATE Item SET nome=?, categoria = ?, status = ?, preco = ?, qtdEstoque = ? WHERE idItem = ?";
+            String sql = "UPDATE Item SET nome=?, categoria = ?, preco = ?, status = ?, qtdEstoque = ?, "
+                    + "imagem = ? WHERE id = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, item.getNome());
             stmt.setString(2, item.getCategoria());
-            stmt.setInt(3, item.getStatus());
-            stmt.setInt(4, item.getId());
+            stmt.setDouble(3, item.getPreco());
+            stmt.setInt(4, item.getStatus());
+            stmt.setInt(5, item.getQtdEstoque());
+            stmt.setString(6, item.getImagem());
+            stmt.setInt(7, item.getId());
+            
             stmt.execute();
         } catch (SQLException ex) {
             System.out.println("Erro ao atualizar item: " + ex.getMessage());

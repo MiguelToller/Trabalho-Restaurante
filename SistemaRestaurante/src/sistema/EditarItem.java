@@ -6,6 +6,7 @@ package sistema;
 
 import dao.ItemDAO;
 import java.util.List;
+import javax.swing.JOptionPane;
 import model.Item;
 
 /**
@@ -13,7 +14,8 @@ import model.Item;
  * @author Eduardo
  */
 public class EditarItem extends javax.swing.JFrame {
-    String nome;
+    String nomeSelecionado;
+    int id;
     
     /**
      * Creates new form EditarItem
@@ -26,10 +28,10 @@ public class EditarItem extends javax.swing.JFrame {
         cmbItem.addActionListener(e -> carregarDadosItemSelecionado());
     
         // Carrega os dados do primeiro item selecionado inicialmente
-        carregarDadosItemSelecionado();
+        carregarDadosItemSelecionado();    
     }
     
-    public void preencherComboItens() {
+    private void preencherComboItens() {
         ItemDAO iDAO = new ItemDAO();
         List<Item> ListaItens = iDAO.getTodosItens();
         
@@ -38,13 +40,14 @@ public class EditarItem extends javax.swing.JFrame {
         }
     }
     
-    public void carregarDadosItemSelecionado() {
-        String nomeSelecionado = (String) cmbItem.getSelectedItem();
+    private void carregarDadosItemSelecionado() {
+        nomeSelecionado = (String) cmbItem.getSelectedItem();
         if (nomeSelecionado != null) {
             ItemDAO iDAO = new ItemDAO();
             Item i = iDAO.getItemPorNome(nomeSelecionado);
 
             if (i != null) {
+                id = i.getId();
                 txtNome.setText(i.getNome());
                 txtPreco.setText(String.valueOf(i.getPreco()));
                 txtQtdEstoque.setText(String.valueOf(i.getQtdEstoque()));
@@ -53,7 +56,7 @@ public class EditarItem extends javax.swing.JFrame {
                 // Seleciona a categoria correta na cmbCategoria
                 cmbCategoria.setSelectedItem(i.getCategoria());
 
-                // Converte status (0 ou 1) para "Disponível" ou "Indisponível"
+                // Converte status (0 ou 1) para "disponivel" ou "indisponivel"
                 if (i.getStatus() == 1) {
                     cmbStatus.setSelectedItem("disponivel");
                 } else {
@@ -134,47 +137,46 @@ public class EditarItem extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtImagem))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtQtdEstoque))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cmbStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtPreco))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtNome))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbItem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(29, 29, 29)
-                        .addComponent(btnEditarItem)))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbItem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(200, 200, 200)
+                            .addComponent(jLabel1))
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel8)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtImagem))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtQtdEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(cmbStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtPreco))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(cmbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtNome))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(btnEditarItem)
+                .addGap(41, 41, 41))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,14 +212,39 @@ public class EditarItem extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarItemActionPerformed
+        if (id == 0) { // Verifica se a variável `id` foi corretamente definida
+            System.out.println("Erro: Nenhum item foi selecionado.");
+            return;
+        }
+
+        Item i = new Item();
+        i.setId(id);
+        i.setNome(txtNome.getText());
+        i.setCategoria((String) cmbCategoria.getSelectedItem());
+
+        String statusSelecionado = (String) cmbStatus.getSelectedItem();
+        int statusBanco = statusSelecionado.equals("disponivel") ? 1 : 0;
+        i.setStatus(statusBanco);
+
+        i.setQtdEstoque(Integer.parseInt(txtQtdEstoque.getText()));
+        i.setImagem(txtImagem.getText());
+        i.setPreco(Double.parseDouble(txtPreco.getText()));
+
+        ItemDAO iDAO = new ItemDAO();
+        iDAO.editarItem(i);
         
+        cmbItem.removeAllItems();
+        preencherComboItens();
+        cmbItem.setSelectedItem(i.getNome());
+        
+        JOptionPane.showMessageDialog(this, "Item atualizado com sucesso!");
     }//GEN-LAST:event_btnEditarItemActionPerformed
 
     /**
