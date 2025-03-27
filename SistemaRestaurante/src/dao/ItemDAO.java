@@ -4,6 +4,11 @@
  */
 package dao;
 
+/**
+ *
+ * @author Miguel
+ */
+
 import Conexao.Conexao;
 import java.sql.*;
 import java.util.ArrayList;

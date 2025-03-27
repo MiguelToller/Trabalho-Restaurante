@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Eduardo/Documents/NetBeansProjects/SistemaRestaurante/src/model/Pedido.java</file>
-            <file>file:/C:/Users/Eduardo/Documents/NetBeansProjects/SistemaRestaurante/src/dao/ItemDAO.java</file>
-            <file>file:/C:/Users/Eduardo/Documents/NetBeansProjects/SistemaRestaurante/src/model/Carrinho.java</file>
-            <file>file:/C:/Users/Eduardo/Documents/NetBeansProjects/SistemaRestaurante/src/model/Item.java</file>
-            <file>file:/C:/Users/Eduardo/Documents/NetBeansProjects/SistemaRestaurante/src/sistema/CadastrarItem.java</file>
-            <file>file:/C:/Users/Eduardo/Documents/NetBeansProjects/SistemaRestaurante/src/model/ItemCarrinho.java</file>
-            <file>file:/C:/Users/Eduardo/Documents/NetBeansProjects/SistemaRestaurante/src/Conexao/testeConexao.java</file>
+            <file>file:/E:/Trabalho-Restaurante/SistemaRestaurante/src/dao/CarrinhoDAO.java</file>
+            <file>file:/E:/Trabalho-Restaurante/SistemaRestaurante/src/sistema/CadastrarItem.java</file>
+            <file>file:/E:/Trabalho-Restaurante/SistemaRestaurante/src/dao/ItemDAO.java</file>
         </group>
     </open-files>
 </project-private>

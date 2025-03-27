@@ -11,7 +11,7 @@ package model;
 public class Pedido {
     private int id;
     private double valorTotal;
-    private Carrinho idCarrinho;
+    private Carrinho carrinho;
 
     public int getId() {
         return id;
@@ -29,12 +29,12 @@ public class Pedido {
         this.valorTotal = valorTotal;
     }
 
-    public Carrinho getIdCarrinho() {
-        return idCarrinho;
+    public Carrinho getCarrinho() {
+        return carrinho;
     }
 
-    public void setIdCarrinho(Carrinho idCarrinho) {
-        this.idCarrinho = idCarrinho;
+    public void setCarrinho(Carrinho idCarrinho) {
+        this.carrinho = idCarrinho;
     }
 
     
