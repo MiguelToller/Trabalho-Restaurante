@@ -50,7 +50,7 @@ public class ItemDAO {
                 i.setId(id);
                 i.setNome(rs.getString("nome"));
                 i.setCategoria(rs.getString("categoria"));
-                i.setStatus(rs.getInt("estado"));
+                i.setStatus(rs.getInt("status"));
                 return i;
             } else {
                 return null;
@@ -91,7 +91,7 @@ public class ItemDAO {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, item.getNome());
             stmt.setString(2, item.getCategoria());
-            stmt.setString(3, item.getEstado());
+            stmt.setInt(3, item.getStatus());
             stmt.setInt(4, item.getId());
             stmt.execute();
         } catch (SQLException ex) {
