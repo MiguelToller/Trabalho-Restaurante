@@ -188,6 +188,8 @@ public class CadastrarItem extends javax.swing.JFrame {
                 
                 obj.setImagem(txtImagem.getText());
                 
+                
+                
                 objDAO.inserir(obj);
                  JOptionPane.showMessageDialog(rootPane, "Item cadastrado com sucesso!");
             } catch (NumberFormatException e){

@@ -65,6 +65,30 @@ public class ItemDAO {
             return null;
         }
     }
+    
+    public Item getItemPorNome(String nome) {
+        String sql = "SELECT nome, categoria, preco, status, qtdEstoque, imagem FROM Item WHERE nome = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, nome);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                Item item = new Item();
+                item.setNome(rs.getString("nome"));
+                item.setCategoria(rs.getString("categoria"));
+                item.setPreco(rs.getDouble("preco"));
+                item.setStatus(rs.getInt("status"));
+                item.setQtdEstoque(rs.getInt("qtdEstoque"));
+                item.setImagem(rs.getString("imagem"));
+                
+                return item;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro ao buscar item por nome: " + ex.getMessage());
+        }
+        return null;
+    }
 
     public List<Item> getTodosItens() {
         String sql = "SELECT * FROM Item";
@@ -92,7 +116,7 @@ public class ItemDAO {
     
     public void editarItem(Item item) {
         try {
-            String sql = "UPDATE Item SET nome=?, categoria = ?, estado = ? WHERE idItem = ?";
+            String sql = "UPDATE Item SET nome=?, categoria = ?, status = ?, preco = ?, qtdEstoque = ? WHERE idItem = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, item.getNome());
             stmt.setString(2, item.getCategoria());
