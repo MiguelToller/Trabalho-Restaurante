@@ -50,7 +50,7 @@ public class ItemDAO {
                 i.setId(id);
                 i.setNome(rs.getString("nome"));
                 i.setCategoria(rs.getString("categoria"));
-                i.setStatus(rs.getString("estado"));
+                i.setStatus(rs.getInt("estado"));
                 return i;
             } else {
                 return null;

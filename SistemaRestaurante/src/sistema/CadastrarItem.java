@@ -175,17 +175,24 @@ public class CadastrarItem extends javax.swing.JFrame {
             //if (objDAO.isItemCadastrada(txtNome.getText()) == true) {
                 //JOptionPane.showMessageDialog(rootPane, "Item já cadastrado!");
             //} else {
+            try {
                 obj.setNome(txtNome.getText());
                 obj.setCategoria((String) cmbCategoria.getSelectedItem());
                 obj.setPreco(Double.parseDouble(txtPreco.getText()));
+                
                 String statusSelecionado = (String) cmbStatus.getSelectedItem();
                 int statusBanco = statusSelecionado.equals("disponível") ? 1 : 0;
                 obj.setStatus(statusBanco);
+                
                 obj.setQtdEstoque(Integer.parseInt(txtQtdEstoque.getText()));
+                
                 obj.setImagem(txtImagem.getText());
-
+                
                 objDAO.inserir(obj);
-                JOptionPane.showMessageDialog(rootPane, "Item cadastrado com sucesso!");
+                 JOptionPane.showMessageDialog(rootPane, "Item cadastrado com sucesso!");
+            } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(rootPane, "Insira números numéricos validos.");
+            }
             //}
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
