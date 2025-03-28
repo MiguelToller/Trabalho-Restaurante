@@ -44,19 +44,23 @@ public class ItemDAO {
     }
 
     public Item getItem(int id) {
-        String sql = "SELECT * FROM Item WHERE idItem = ?";
+        String sql = "SELECT * FROM Item WHERE id = ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()) {
-                Item i = new Item();
-                i.setId(id);
-                i.setNome(rs.getString("nome"));
-                i.setCategoria(rs.getString("categoria"));
-                i.setStatus(rs.getInt("status"));
-                return i;
+                Item item = new Item();
+                item.setId(rs.getInt("id"));
+                item.setNome(rs.getString("nome"));
+                item.setCategoria(rs.getString("categoria"));
+                item.setPreco(rs.getDouble("preco"));
+                item.setStatus(rs.getInt("status"));
+                item.setQtdEstoque(rs.getInt("qtdEstoque"));
+                item.setImagem(rs.getString("imagem"));
+                
+                return item;
             } else {
                 return null;
             }
@@ -67,7 +71,7 @@ public class ItemDAO {
     }
     
     public Item getItemPorNome(String nome) {
-        String sql = "SELECT id, nome, categoria, preco, status, qtdEstoque, imagem FROM Item WHERE nome = ?";
+        String sql = "SELECT * FROM Item WHERE nome = ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, nome);
@@ -98,15 +102,15 @@ public class ItemDAO {
         try (PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                Item i = new Item();
-                i.setId(rs.getInt("id"));
-                i.setNome(rs.getString("nome"));
-                i.setCategoria(rs.getString("categoria"));
-                i.setStatus(rs.getInt("status"));
-                i.setPreco(rs.getDouble("preco"));
-                i.setQtdEstoque(rs.getInt("qtdEstoque"));
-                i.setImagem(rs.getString("imagem"));
-                listaItens.add(i);
+                Item item = new Item();
+                item.setId(rs.getInt("id"));
+                item.setNome(rs.getString("nome"));
+                item.setCategoria(rs.getString("categoria"));
+                item.setStatus(rs.getInt("status"));
+                item.setPreco(rs.getDouble("preco"));
+                item.setQtdEstoque(rs.getInt("qtdEstoque"));
+                item.setImagem(rs.getString("imagem"));
+                listaItens.add(item);
             }
         } catch (SQLException ex) {
             System.out.println("Erro ao consultar itens: " + ex.getMessage());
@@ -114,10 +118,9 @@ public class ItemDAO {
         return listaItens;
     }
     
-    
     public void editarItem(Item item) {
         try {
-            String sql = "UPDATE Item SET nome=?, categoria = ?, preco = ?, status = ?, qtdEstoque = ?, "
+            String sql = "UPDATE Item SET nome = ?, categoria = ?, preco = ?, status = ?, qtdEstoque = ?, "
                     + "imagem = ? WHERE id = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, item.getNome());
@@ -136,12 +139,26 @@ public class ItemDAO {
 
     public void excluir(int id) {
         try {
-            String sql = "DELETE FROM Item WHERE idItem = ?";
+            String sql = "DELETE FROM Item WHERE id = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             stmt.execute();
         } catch (SQLException ex) {
             System.out.println("Erro ao excluir item: " + ex.getMessage());
+        }
+    }
+    
+    public boolean isItemCadastrado(String nome) {
+        String sql = "SELECT 1 FROM Item WHERE nome = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, nome);
+            ResultSet rs = stmt.executeQuery();
+            
+            return rs.next();
+        } catch (SQLException ex) {
+            System.out.println("Erro ao verificar nome: " + ex.getMessage());
+            return false;
         }
     }
 }

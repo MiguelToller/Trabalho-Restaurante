@@ -30,16 +30,13 @@ public class CadastrarItem extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
+        lblNome = new javax.swing.JLabel();
+        lblCategoria = new javax.swing.JLabel();
+        lblPreco = new javax.swing.JLabel();
+        lblStatus = new javax.swing.JLabel();
+        lblQtdEstoque = new javax.swing.JLabel();
+        lblImagem = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         txtPreco = new javax.swing.JTextField();
         txtQtdEstoque = new javax.swing.JTextField();
@@ -48,28 +45,22 @@ public class CadastrarItem extends javax.swing.JFrame {
         cmbStatus = new javax.swing.JComboBox<>();
         btnSalvar = new javax.swing.JButton();
 
-        jLabel8.setText("jLabel8");
-
-        jTextField5.setText("jTextField5");
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("Cadastrar Item");
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblTitulo.setText("Cadastrar Item");
 
-        jLabel2.setText("Nome:");
+        lblNome.setText("Nome:");
 
-        jLabel3.setText("Categoria");
+        lblCategoria.setText("Categoria");
 
-        jLabel4.setText("Preco:");
+        lblPreco.setText("Preco:");
 
-        jLabel5.setText("Status");
+        lblStatus.setText("Status");
 
-        jLabel6.setText("Quantidade Estoque:");
+        lblQtdEstoque.setText("Quantidade Estoque:");
 
-        jLabel7.setText("URL Imagem:");
+        lblImagem.setText("URL Imagem:");
 
         cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "comida", "bebida", "sobremesa" }));
 
@@ -92,36 +83,36 @@ public class CadastrarItem extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(jLabel2)
+                            .addComponent(lblNome)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(txtNome))
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(jLabel3)
+                            .addComponent(lblCategoria)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(cmbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(jLabel4)
+                            .addComponent(lblPreco)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(txtPreco))
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(jLabel5)
+                            .addComponent(lblStatus)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(cmbStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(184, 184, 184)
-                            .addComponent(jLabel1))
+                            .addComponent(lblTitulo))
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
+                                    .addComponent(lblImagem)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(txtImagem))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
+                                    .addComponent(lblQtdEstoque)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(txtQtdEstoque))))))
                 .addContainerGap(178, Short.MAX_VALUE))
@@ -130,30 +121,30 @@ public class CadastrarItem extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblTitulo)
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(lblNome)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(lblCategoria)
                     .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(lblPreco)
                     .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                    .addComponent(lblStatus)
                     .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(lblQtdEstoque)
                     .addComponent(txtQtdEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(lblImagem)
                     .addComponent(txtImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnSalvar)
@@ -163,39 +154,44 @@ public class CadastrarItem extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void limparFormulario(){
+        txtNome.setText("");
+        txtPreco.setText("");
+        txtImagem.setText("");
+        txtQtdEstoque.setText("");
+        cmbCategoria.setSelectedIndex(0);
+        cmbStatus.setSelectedIndex(0);
+    }
+    
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        Item obj = new Item();
-        ItemDAO objDAO = new ItemDAO();
+        Item i = new Item();
+        ItemDAO iDAO = new ItemDAO();
 
         // Verifica se os campos de texto estão preenchidos
-        if (txtNome.getText().isEmpty() || txtPreco.getText().isEmpty() || 
-                txtQtdEstoque.getText().isEmpty() || txtImagem.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Todos os campos devem ser preenchidos!");
+        if (txtNome.getText().isBlank()|| txtPreco.getText().isBlank()|| 
+                txtQtdEstoque.getText().isBlank()|| txtImagem.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "ERRO", JOptionPane.ERROR_MESSAGE);
         } else {
-            //if (objDAO.isItemCadastrada(txtNome.getText()) == true) {
-                //JOptionPane.showMessageDialog(rootPane, "Item já cadastrado!");
-            //} else {
-            try {
-                obj.setNome(txtNome.getText());
-                obj.setCategoria((String) cmbCategoria.getSelectedItem());
-                obj.setPreco(Double.parseDouble(txtPreco.getText()));
-                
-                String statusSelecionado = (String) cmbStatus.getSelectedItem();
-                int statusBanco = statusSelecionado.equals("disponível") ? 1 : 0;
-                obj.setStatus(statusBanco);
-                
-                obj.setQtdEstoque(Integer.parseInt(txtQtdEstoque.getText()));
-                
-                obj.setImagem(txtImagem.getText());
-                
-                
-                
-                objDAO.inserir(obj);
-                 JOptionPane.showMessageDialog(rootPane, "Item cadastrado com sucesso!");
-            } catch (NumberFormatException e){
-                JOptionPane.showMessageDialog(rootPane, "Insira números numéricos validos.");
+            if (iDAO.isItemCadastrado(txtNome.getText()) == true) {
+                JOptionPane.showMessageDialog(null, "Item ja cadastrado!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+                    i.setNome(txtNome.getText().strip());
+                    i.setCategoria((String) cmbCategoria.getSelectedItem());
+                    i.setPreco(Double.parseDouble(txtPreco.getText()));
+                    String statusSelecionado = (String) cmbStatus.getSelectedItem();
+                    int statusBanco = statusSelecionado.equals("disponível") ? 1 : 0;
+                    i.setStatus(statusBanco);
+                    i.setQtdEstoque(Integer.parseInt(txtQtdEstoque.getText()));                
+                    i.setImagem(txtImagem.getText());
+
+                    iDAO.inserir(i);
+                    JOptionPane.showMessageDialog(null, "Item cadastrado com sucesso!", "Item Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+                    limparFormulario();
+                } catch (NumberFormatException e){
+                    JOptionPane.showMessageDialog(null, "Insira dados numéricos válidos!", "ERRO", JOptionPane.ERROR_MESSAGE);
+                }
             }
-            //}
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -238,16 +234,13 @@ public class CadastrarItem extends javax.swing.JFrame {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cmbCategoria;
     private javax.swing.JComboBox<String> cmbStatus;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel lblCategoria;
+    private javax.swing.JLabel lblImagem;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblPreco;
+    private javax.swing.JLabel lblQtdEstoque;
+    private javax.swing.JLabel lblStatus;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtImagem;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtPreco;
