@@ -164,12 +164,13 @@ public class ItemDAO {
     
     public List<Item> listarCardapioDisponivel() {
         List<Item> itens = new ArrayList<>();
-        String sql = "SELECT nome, preco FROM item WHERE status = 1";
+        String sql = "SELECT id, nome, preco FROM itens WHERE status = 1";
         
         try (PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Item item = new Item();
+                item.setId(rs.getInt("id"));
                 item.setNome(rs.getString("nome"));
                 item.setPreco(rs.getDouble("preco"));
                 
@@ -178,6 +179,7 @@ public class ItemDAO {
         } catch (SQLException e) {
             System.out.println("Erro ao listar cardapio: " + e.getMessage());
         }
+        
         return itens;
     }
 }

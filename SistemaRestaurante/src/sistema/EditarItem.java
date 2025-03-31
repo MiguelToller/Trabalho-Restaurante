@@ -229,9 +229,9 @@ public class EditarItem extends javax.swing.JFrame {
                 txtQtdEstoque.getText().isBlank()|| txtImagem.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "ERRO", JOptionPane.ERROR_MESSAGE);
         } else {
-            if (iDAO.isItemCadastrado(txtNome.getText()) == true) {
-                JOptionPane.showMessageDialog(null, "Item ja cadastrado!", "ERRO", JOptionPane.ERROR_MESSAGE);
-            } else {
+            //if (iDAO.isItemCadastrado(txtNome.getText()) == true) {
+                //JOptionPane.showMessageDialog(null, "Item ja cadastrado!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //} else {
                 try {
                     Item i = new Item();
                     i.setId(id);
@@ -255,7 +255,7 @@ public class EditarItem extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Insira dados numéricos válidos!", "ERRO", JOptionPane.ERROR_MESSAGE);
                 }
             }
-        }
+        //}
     }//GEN-LAST:event_btnEditarItemActionPerformed
 
     /**
