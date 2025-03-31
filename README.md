@@ -30,7 +30,9 @@ A funcionalidade implementada é o **Cadastro de Itens**, onde os dados são ins
 
 ## Diagrama de Classes
 
-<!-- Substitua o link abaixo com a imagem do seu diagrama de classes -->
+O diagrama de classes ilustra a estrutura do sistema, com a classe `Item` representando os produtos, e a classe `ItemDAO` sendo responsável pela persistência dos dados no banco. 
+As classes `CadastrarItemForm`, `EditarItemForm` e `ExcluirItemForm` representam as interfaces gráficas que interagem com o usuário.
+
 ### Astah
 
 ![C - Cadastro de Produto](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Classe/CadastrarItem%20Diagram.png)
@@ -47,7 +49,8 @@ A funcionalidade implementada é o **Cadastro de Itens**, onde os dados são ins
 
 ## Diagrama de Sequência
 
-<!-- Substitua o link abaixo com a imagem do seu diagrama de sequência -->
+O diagrama de sequência descreve a interação entre os objetos ao longo do tempo, detalhando como as solicitações de cadastro, edição e exclusão de produtos fluem no sistema.
+
 ### Astah
 
 ![DS - Cadastro de Produto](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/CadastrarItem%20Sequencia.png)
@@ -62,9 +65,23 @@ A funcionalidade implementada é o **Cadastro de Itens**, onde os dados são ins
 
 ---
 
-### PlantUML
+## Casos de Uso
 
-![image](https://github.com/user-attachments/assets/687dad68-2687-40fd-a1ac-9112088cc1a1)
+### 1. Cadastrar Produto
+O usuário insere os dados do produto na interface gráfica, e os dados são salvos no banco de dados MySQL.
+
+### 2. Editar Produto
+O usuário pode modificar as informações de um produto existente.
+
+### 3. Excluir Produto
+O usuário pode remover um produto do sistema.
+
+### 4. Visualizar Produtos
+O sistema permite visualizar os produtos cadastrados.
+
+---
+
+![DCS - Cadastro de Produto](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Extra/Diagrama%20UseCase.png)
 
 ---
 
@@ -162,10 +179,11 @@ Consulte o arquivo [LICENSE](LICENSE) para mais informações.
 
 ## Autores
 
-**Luiz Miguel Toller Marconatto**
-**Eduardo Carvalho Ceretta**
-**Gabriel Machado Orling de Oliveira**
-Curso de Ciência da Computação – Universidade Franciscana (UFN)
+**Luiz Miguel Toller Marconatto**  
+**Eduardo Carvalho Ceretta**  
+**Gabriel Machado Orling de Oliveira**  
 
-E-mail: luizmigueltoller@gmail.com
+Curso de Ciência da Computação – Universidade Franciscana (UFN)  
+
+E-mail: luizmigueltoller@gmail.com  
 GitHub: [@MiguelToller](https://github.com/MiguelToller)
