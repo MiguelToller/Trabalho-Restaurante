@@ -5,8 +5,16 @@
 package sistema;
 
 import dao.ItemDAO;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import model.Item;
 
 /**
@@ -14,8 +22,8 @@ import model.Item;
  * @author Eduardo
  */
 public class EditarItem extends javax.swing.JFrame {
-    String nomeSelecionado;
-    int id;
+    private String nomeSelecionado, imagePath;
+    private int id;
     
     /**
      * Creates new form EditarItem
@@ -79,20 +87,21 @@ public class EditarItem extends javax.swing.JFrame {
 
         lblTitulo = new javax.swing.JLabel();
         lblItem = new javax.swing.JLabel();
-        cmbItem = new javax.swing.JComboBox<String>();
+        cmbItem = new javax.swing.JComboBox<>();
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         lblPreco = new javax.swing.JLabel();
         txtPreco = new javax.swing.JTextField();
         lblCategoria = new javax.swing.JLabel();
-        cmbCategoria = new javax.swing.JComboBox<String>();
+        cmbCategoria = new javax.swing.JComboBox<>();
         lblStatus = new javax.swing.JLabel();
-        cmbStatus = new javax.swing.JComboBox<String>();
+        cmbStatus = new javax.swing.JComboBox<>();
         lblQtdEstoque = new javax.swing.JLabel();
         txtQtdEstoque = new javax.swing.JTextField();
         lblImagem = new javax.swing.JLabel();
         txtImagem = new javax.swing.JTextField();
         btnEditarItem = new javax.swing.JButton();
+        btnEscolher = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -111,24 +120,33 @@ public class EditarItem extends javax.swing.JFrame {
         lblCategoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCategoria.setText("Categoria:");
 
-        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "comida", "bebida", "sobremesa" }));
+        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "comida", "bebida", "sobremesa" }));
 
         lblStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblStatus.setText("Status:");
 
-        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "disponivel", "indisponivel" }));
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "disponivel", "indisponivel" }));
 
         lblQtdEstoque.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblQtdEstoque.setText("Quantidade Estoque:");
 
         lblImagem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblImagem.setText("URL Imagem:");
+        lblImagem.setText("Imagem:");
+
+        txtImagem.setEditable(false);
 
         btnEditarItem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEditarItem.setText("Alterar Dados");
         btnEditarItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarItemActionPerformed(evt);
+            }
+        });
+
+        btnEscolher.setText("Escolher");
+        btnEscolher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEscolherActionPerformed(evt);
             }
         });
 
@@ -174,9 +192,15 @@ public class EditarItem extends javax.swing.JFrame {
                                     .addComponent(lblNome)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(txtNome))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(btnEditarItem)
-                .addGap(41, 41, 41))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                        .addComponent(btnEditarItem)
+                        .addGap(41, 41, 41))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEscolher)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,7 +235,8 @@ public class EditarItem extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblImagem)
-                    .addComponent(txtImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEscolher))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -229,10 +254,7 @@ public class EditarItem extends javax.swing.JFrame {
                 txtQtdEstoque.getText().isBlank()|| txtImagem.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "ERRO", JOptionPane.ERROR_MESSAGE);
         } else {
-            if (iDAO.isItemCadastrado(txtNome.getText()) == true) {
-                JOptionPane.showMessageDialog(null, "Item ja cadastrado!", "ERRO", JOptionPane.ERROR_MESSAGE);
-            } else {
-                try {
+            try {
                     Item i = new Item();
                     i.setId(id);
                     i.setNome(txtNome.getText().strip());
@@ -254,9 +276,26 @@ public class EditarItem extends javax.swing.JFrame {
                 } catch (NumberFormatException e){
                     JOptionPane.showMessageDialog(null, "Insira dados numéricos válidos!", "ERRO", JOptionPane.ERROR_MESSAGE);
                 }
-            }
         }
     }//GEN-LAST:event_btnEditarItemActionPerformed
+
+    private void btnEscolherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscolherActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+    
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Imagem", "jpg", "jpeg", "png", "gif");
+        fileChooser.setFileFilter(filter);
+    
+        int result = fileChooser.showOpenDialog(this);
+    
+        if (result == JFileChooser.APPROVE_OPTION) {
+            
+            File selectedFile = fileChooser.getSelectedFile();
+            
+            imagePath = selectedFile.getAbsolutePath();
+                
+            txtImagem.setText(imagePath);
+        }
+    }//GEN-LAST:event_btnEscolherActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,6 +334,7 @@ public class EditarItem extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditarItem;
+    private javax.swing.JButton btnEscolher;
     private javax.swing.JComboBox<String> cmbCategoria;
     private javax.swing.JComboBox<String> cmbItem;
     private javax.swing.JComboBox<String> cmbStatus;
