@@ -184,7 +184,7 @@ public class CadastrarItem extends javax.swing.JFrame {
         txtQtdEstoque.setText("");
         cmbCategoria.setSelectedIndex(0);
         cmbStatus.setSelectedIndex(0);
-        imageLabel.setText("");
+        imageLabel.setIcon(null);
     }
     
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
