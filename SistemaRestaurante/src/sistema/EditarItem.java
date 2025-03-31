@@ -94,7 +94,7 @@ public class EditarItem extends javax.swing.JFrame {
         txtImagem = new javax.swing.JTextField();
         btnEditarItem = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblTitulo.setText("Editar Item");

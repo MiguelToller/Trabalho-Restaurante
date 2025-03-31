@@ -5,15 +5,23 @@
 package sistema;
 
 import dao.ItemDAO;
-import javax.swing.JOptionPane;
+import java.awt.Image;
 import model.Item;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
  * @author Eduardo
  */
 public class CadastrarItem extends javax.swing.JFrame {
-
+    private String imagePath;
     /**
      * Creates new form CadastrarItem
      */
@@ -40,12 +48,14 @@ public class CadastrarItem extends javax.swing.JFrame {
         txtNome = new javax.swing.JTextField();
         txtPreco = new javax.swing.JTextField();
         txtQtdEstoque = new javax.swing.JTextField();
-        txtImagem = new javax.swing.JTextField();
         cmbCategoria = new javax.swing.JComboBox<>();
         cmbStatus = new javax.swing.JComboBox<>();
         btnSalvar = new javax.swing.JButton();
+        btnEscolher = new javax.swing.JButton();
+        imageLabel = new javax.swing.JLabel();
+        lblNomeImagem = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblTitulo.setText("Cadastrar Item");
@@ -60,7 +70,7 @@ public class CadastrarItem extends javax.swing.JFrame {
 
         lblQtdEstoque.setText("Quantidade Estoque:");
 
-        lblImagem.setText("URL Imagem:");
+        lblImagem.setText("Imagem:");
 
         cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "comida", "bebida", "sobremesa" }));
 
@@ -70,6 +80,13 @@ public class CadastrarItem extends javax.swing.JFrame {
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
+            }
+        });
+
+        btnEscolher.setText("Escolher");
+        btnEscolher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEscolherActionPerformed(evt);
             }
         });
 
@@ -107,15 +124,19 @@ public class CadastrarItem extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createSequentialGroup()
                                     .addComponent(lblImagem)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtImagem))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblNomeImagem)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnEscolher))
+                                .addGroup(layout.createSequentialGroup()
                                     .addComponent(lblQtdEstoque)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(txtQtdEstoque))))))
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(imageLabel)
+                .addContainerGap(172, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +166,9 @@ public class CadastrarItem extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblImagem)
-                    .addComponent(txtImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEscolher)
+                    .addComponent(imageLabel)
+                    .addComponent(lblNomeImagem))
                 .addGap(18, 18, 18)
                 .addComponent(btnSalvar)
                 .addContainerGap(30, Short.MAX_VALUE))
@@ -157,7 +180,7 @@ public class CadastrarItem extends javax.swing.JFrame {
     private void limparFormulario(){
         txtNome.setText("");
         txtPreco.setText("");
-        txtImagem.setText("");
+        lblNomeImagem.setText("");
         txtQtdEstoque.setText("");
         cmbCategoria.setSelectedIndex(0);
         cmbStatus.setSelectedIndex(0);
@@ -169,7 +192,7 @@ public class CadastrarItem extends javax.swing.JFrame {
 
         // Verifica se os campos de texto estão preenchidos
         if (txtNome.getText().isBlank()|| txtPreco.getText().isBlank()|| 
-                txtQtdEstoque.getText().isBlank()|| txtImagem.getText().isBlank()) {
+                txtQtdEstoque.getText().isBlank()|| imagePath.isBlank()) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "ERRO", JOptionPane.ERROR_MESSAGE);
         } else {
             if (iDAO.isItemCadastrado(txtNome.getText()) == true) {
@@ -183,7 +206,7 @@ public class CadastrarItem extends javax.swing.JFrame {
                     int statusBanco = statusSelecionado.equals("disponível") ? 1 : 0;
                     i.setStatus(statusBanco);
                     i.setQtdEstoque(Integer.parseInt(txtQtdEstoque.getText()));                
-                    i.setImagem(txtImagem.getText());
+                    i.setImagem(imagePath);
 
                     iDAO.inserir(i);
                     JOptionPane.showMessageDialog(null, "Item cadastrado com sucesso!", "Item Cadastrado", JOptionPane.INFORMATION_MESSAGE);
@@ -194,6 +217,45 @@ public class CadastrarItem extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnEscolherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscolherActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+    
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Imagem", "jpg", "jpeg", "png", "gif");
+        fileChooser.setFileFilter(filter);
+    
+        int result = fileChooser.showOpenDialog(this);
+    
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                File selectedFile = fileChooser.getSelectedFile();
+            
+                BufferedImage img = ImageIO.read(selectedFile);
+            
+                int iconWidth = 24;
+                int iconHeight = 24;
+                
+                Image scaledImage = img.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+                ImageIcon scaledIcon = new ImageIcon(scaledImage);
+                
+                imageLabel.setIcon(scaledIcon);
+                imageLabel.setSize(iconWidth, iconHeight);
+
+            
+
+                imagePath = selectedFile.getAbsolutePath();
+                
+                String fileName = selectedFile.getName();
+
+                lblNomeImagem.setText(fileName);
+            
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this,
+                    "Erro ao carregar a imagem: " + ex.getMessage(),
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnEscolherActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,17 +293,19 @@ public class CadastrarItem extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEscolher;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cmbCategoria;
     private javax.swing.JComboBox<String> cmbStatus;
+    private javax.swing.JLabel imageLabel;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblImagem;
     private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblNomeImagem;
     private javax.swing.JLabel lblPreco;
     private javax.swing.JLabel lblQtdEstoque;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTextField txtImagem;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtPreco;
     private javax.swing.JTextField txtQtdEstoque;
