@@ -79,22 +79,22 @@ public class EditarItem extends javax.swing.JFrame {
 
         lblTitulo = new javax.swing.JLabel();
         lblItem = new javax.swing.JLabel();
-        cmbItem = new javax.swing.JComboBox<>();
+        cmbItem = new javax.swing.JComboBox<String>();
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         lblPreco = new javax.swing.JLabel();
         txtPreco = new javax.swing.JTextField();
         lblCategoria = new javax.swing.JLabel();
-        cmbCategoria = new javax.swing.JComboBox<>();
+        cmbCategoria = new javax.swing.JComboBox<String>();
         lblStatus = new javax.swing.JLabel();
-        cmbStatus = new javax.swing.JComboBox<>();
+        cmbStatus = new javax.swing.JComboBox<String>();
         lblQtdEstoque = new javax.swing.JLabel();
         txtQtdEstoque = new javax.swing.JTextField();
         lblImagem = new javax.swing.JLabel();
         txtImagem = new javax.swing.JTextField();
         btnEditarItem = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblTitulo.setText("Editar Item");
@@ -111,12 +111,12 @@ public class EditarItem extends javax.swing.JFrame {
         lblCategoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCategoria.setText("Categoria:");
 
-        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "comida", "bebida", "sobremesa" }));
+        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "comida", "bebida", "sobremesa" }));
 
         lblStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblStatus.setText("Status:");
 
-        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "disponivel", "indisponivel" }));
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "disponivel", "indisponivel" }));
 
         lblQtdEstoque.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblQtdEstoque.setText("Quantidade Estoque:");

@@ -45,7 +45,7 @@ public class ExcluirItem extends javax.swing.JFrame {
 
         lblTitulo = new javax.swing.JLabel();
         lblSubTitulo = new javax.swing.JLabel();
-        cmbItem = new javax.swing.JComboBox<>();
+        cmbItem = new javax.swing.JComboBox<String>();
         btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
