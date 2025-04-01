@@ -137,18 +137,21 @@ O sistema permite visualizar os produtos cadastrados.
 
 ### Descrição dos Diretórios e Arquivos
 
-Classes que representam o modelo de dados.
+**Modelos de Dados**  
+Contêm as classes responsáveis pela representação dos dados no sistema.
 - **`Item.java`**
 - **`Carrinho.java`**
 - **`ItemCarrinho.java`**
 - **`Pedido.java`**
 
-Interfaces gráficas (Swing) para entrada, alteração e exclusão de dados.
+**Interfaces Gráficas (Swing)**  
+Interfaces gráficas responsáveis pela interação com o usuário para entrada, alteração e exclusão de dados.
 - **`CadastrarItem.form`**
 - **`EditarItem.form`**
 - **`ExcluirItem.form`**
 
-  Responsáveis por salvar e carregar produtos do banco.
+**Acesso ao Banco de Dados**  
+Classes responsáveis por interagir com o banco de dados.
 - **`CarrinhoDAO.java`**
 - **`ItemCarrinhoDAO.java`**
 - **`ItemDAO.java`**
@@ -180,8 +183,8 @@ Curso de Ciência da Computação – Universidade Franciscana (UFN)
 E-mail: luizmigueltoller@gmail.com  
 GitHub: [@MiguelToller](https://github.com/MiguelToller)
 
-E-mail: Duduceretta@gmail.com
+E-mail: Duduceretta@gmail.com  
 GitHub: [@Duduceretta](https://github.com/Duduceretta)
 
-E-mail: gabrielorling1515@gmail.com
+E-mail: gabrielorling1515@gmail.com  
 GitHub: [@Gorling](https://github.com/Gorling)
