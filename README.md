@@ -145,23 +145,22 @@ O sistema permite visualizar os produtos cadastrados.
 
 ### Descrição dos Diretórios e Arquivos
 
-- **`Item.java`**: Classe que representa o modelo de dados.
-- **`Carrinho.java`**: Classe que representa o modelo de dados.
-- **`ItemCarrinho.java`**: Classe que representa o modelo de dados.
-- **`Pedido.java`**: Classe que representa o modelo de dados.
+Classes que representam o modelo de dados.
+- **`Item.java`**
+- **`Carrinho.java`**
+- **`ItemCarrinho.java`**
+- **`Pedido.java`**
 
-- **`CadastrarItem.form`**: Interface gráfica (Swing) para entrada de dados.
-- **`EditarItem.form`**: Interface gráfica (Swing) para alteração de dados.
-- **`ExcluirItem.form`**: Interface gráfica (Swing) para exclusão de dados.
-  
-- **`CarrinhoDAO.java`**: Responsável por salvar e carregar produtos do banco.
-- **`ItemCarrinhoDAO.java`**: Responsável por salvar e carregar produtos do banco.
-- **`ItemDAO.java`**: Responsável por salvar e carregar produtos do banco.
-- **`PedidoDAO.java`**: Responsável por salvar e carregar produtos do banco.
-  
-- **`CadastrarItem.java`**: Interface gráfica (Swing) para entrada de dados.
-- **`EditarItem.java`**: Interface gráfica (Swing) para alteração de dados.
-- **`ExcluirItem.java`**: Interface gráfica (Swing) para exclusão de dados.
+Interfaces gráficas (Swing) para entrada, alteração e exclusão de dados.
+- **`CadastrarItem.form`**
+- **`EditarItem.form`**
+- **`ExcluirItem.form`**
+
+  Responsáveis por salvar e carregar produtos do banco.
+- **`CarrinhoDAO.java`**
+- **`ItemCarrinhoDAO.java`**
+- **`ItemDAO.java`**
+- **`PedidoDAO.java`**
   
 - **`Banco.txt`**: Arquivo onde os dados são persistidos.
 - **`LICENSE`**: Arquivo de licença MIT.
