@@ -20,14 +20,6 @@ A funcionalidade implementada é o **Cadastro de Itens**, onde os dados são ins
 
 ---
 
-## Estrutura do Projeto
-
-- `Item`: classe modelo que representa o item
-- `ItemDAO`: responsável por salvar e carregar os dados do banco
-- `CadastrarItemForm`: interface gráfica para entrada dos dados
-
----
-
 ## Diagrama de Classes
 
 O diagrama de classes ilustra a estrutura do sistema, com a classe `Item` representando os produtos, e a classe `ItemDAO` sendo responsável pela persistência dos dados no banco. 
@@ -161,10 +153,15 @@ Interfaces gráficas (Swing) para entrada, alteração e exclusão de dados.
 - **`ItemCarrinhoDAO.java`**
 - **`ItemDAO.java`**
 - **`PedidoDAO.java`**
-  
-- **`Banco.txt`**: Arquivo onde os dados são persistidos.
-- **`LICENSE`**: Arquivo de licença MIT.
-- **`README.md`**: Este arquivo com instruções e explicações do projeto.
+
+  Arquivo onde os dados são persistidos.
+- **`Banco.txt`**
+
+  Arquivo de licença MIT.
+- **`LICENSE`**
+
+  Este arquivo com instruções e explicações do projeto.
+- **`README.md`**:
 
 ---
 
