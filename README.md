@@ -154,14 +154,10 @@ Interfaces gráficas (Swing) para entrada, alteração e exclusão de dados.
 - **`ItemDAO.java`**
 - **`PedidoDAO.java`**
 
-  Arquivo onde os dados são persistidos.
-- **`Banco.txt`**
-
-  Arquivo de licença MIT.
-- **`LICENSE`**
-
-  Este arquivo com instruções e explicações do projeto.
-- **`README.md`**:
+**Arquivos de Configuração e Licença**  
+- **`Banco.txt`** – Arquivo onde os dados são persistidos.
+- **`LICENSE`** – Arquivo que contém a licença MIT do projeto.
+- **`README.md`** – Este arquivo, que contém instruções e explicações sobre o projeto.
 
 ---
 
@@ -183,3 +179,9 @@ Curso de Ciência da Computação – Universidade Franciscana (UFN)
 
 E-mail: luizmigueltoller@gmail.com  
 GitHub: [@MiguelToller](https://github.com/MiguelToller)
+
+E-mail: Duduceretta@gmail.com
+GitHub: [@Duduceretta](https://github.com/Duduceretta)
+
+E-mail: gabrielorling1515@gmail.com
+GitHub: [@Gorling](https://github.com/Gorling)
