@@ -118,6 +118,75 @@ public class ItemDAO {
         return listaItens;
     }
     
+    public List<Item> getTodosItensComida() {
+        String sql = "SELECT * FROM Item WHERE Categoria = 'comida' AND status = 'disponivel'";
+        List<Item> listaItens = new ArrayList<>();
+        
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Item item = new Item();
+                item.setId(rs.getInt("id"));
+                item.setNome(rs.getString("nome"));
+                //item.setCategoria(rs.getString("categoria"));
+                //item.setStatus(rs.getInt("status"));
+                item.setPreco(rs.getDouble("preco"));
+                //item.setQtdEstoque(rs.getInt("qtdEstoque"));
+                item.setImagem(rs.getString("imagem"));
+                listaItens.add(item);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro ao consultar comidas: " + ex.getMessage());
+        }
+        return listaItens;
+    }
+    
+    public List<Item> getTodosItensBebida() {
+        String sql = "SELECT * FROM Item WHERE Categoria = 'bebida' AND status = 'disponivel'";
+        List<Item> listaItens = new ArrayList<>();
+        
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Item item = new Item();
+                item.setId(rs.getInt("id"));
+                item.setNome(rs.getString("nome"));
+                //item.setCategoria(rs.getString("categoria"));
+                //item.setStatus(rs.getInt("status"));
+                item.setPreco(rs.getDouble("preco"));
+                //item.setQtdEstoque(rs.getInt("qtdEstoque"));
+                item.setImagem(rs.getString("imagem"));
+                listaItens.add(item);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro ao consultar bebidas: " + ex.getMessage());
+        }
+        return listaItens;
+    }
+    
+    public List<Item> getTodosItensSobremesa() {
+        String sql = "SELECT * FROM Item WHERE Categoria = 'sobremesa' AND status = 'disponivel'";
+        List<Item> listaItens = new ArrayList<>();
+        
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Item item = new Item();
+                item.setId(rs.getInt("id"));
+                item.setNome(rs.getString("nome"));
+                //item.setCategoria(rs.getString("categoria"));
+                //item.setStatus(rs.getInt("status"));
+                item.setPreco(rs.getDouble("preco"));
+                //item.setQtdEstoque(rs.getInt("qtdEstoque"));
+                item.setImagem(rs.getString("imagem"));
+                listaItens.add(item);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro ao consultar sobremesas: " + ex.getMessage());
+        }
+        return listaItens;
+    }
+    
     public void editarItem(Item item) {
         try {
             String sql = "UPDATE Item SET nome = ?, categoria = ?, preco = ?, status = ?, qtdEstoque = ?, "
