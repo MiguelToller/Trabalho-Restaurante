@@ -15,6 +15,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.NoSuchFileException;
 
 /**
  *
@@ -185,77 +188,107 @@ public class CadastrarItem extends javax.swing.JFrame {
         cmbCategoria.setSelectedIndex(0);
         cmbStatus.setSelectedIndex(0);
         imageLabel.setIcon(null);
+        imagePath = "";
     }
     
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         Item i = new Item();
         ItemDAO iDAO = new ItemDAO();
+    
 
-        // Verifica se os campos de texto estão preenchidos
-        if (txtNome.getText().isBlank()|| txtPreco.getText().isBlank()|| 
-                txtQtdEstoque.getText().isBlank()|| imagePath.isBlank()) {
-            JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "ERRO", JOptionPane.ERROR_MESSAGE);
-        } else {
-            if (iDAO.isItemCadastrado(txtNome.getText()) == true) {
-                JOptionPane.showMessageDialog(null, "Item ja cadastrado!", "ERRO", JOptionPane.ERROR_MESSAGE);
-            } else {
-                try {
-                    i.setNome(txtNome.getText().strip());
-                    i.setCategoria((String) cmbCategoria.getSelectedItem());
-                    i.setPreco(Double.parseDouble(txtPreco.getText()));
-                    String statusSelecionado = (String) cmbStatus.getSelectedItem();
-                    int statusBanco = statusSelecionado.equals("disponível") ? 1 : 0;
-                    i.setStatus(statusBanco);
-                    i.setQtdEstoque(Integer.parseInt(txtQtdEstoque.getText()));                
-                    i.setImagem(imagePath);
+    if (txtNome.getText().isBlank() || txtPreco.getText().isBlank() || 
+            txtQtdEstoque.getText().isBlank() || imagePath == null || imagePath.isBlank()) {
+        JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "ERRO", JOptionPane.ERROR_MESSAGE);
+        return; 
+    }
 
-                    iDAO.inserir(i);
-                    JOptionPane.showMessageDialog(null, "Item cadastrado com sucesso!", "Item Cadastrado", JOptionPane.INFORMATION_MESSAGE);
-                    limparFormulario();
-                } catch (NumberFormatException e){
-                    JOptionPane.showMessageDialog(null, "Insira dados numéricos válidos!", "ERRO", JOptionPane.ERROR_MESSAGE);
-                }
-            }
+    if (iDAO.isItemCadastrado(txtNome.getText().strip())) {
+        JOptionPane.showMessageDialog(null, "Item já cadastrado!", "ERRO", JOptionPane.ERROR_MESSAGE);
+        return; 
+    }
+
+    try {
+        
+        i.setNome(txtNome.getText().strip());
+        i.setCategoria((String) cmbCategoria.getSelectedItem());
+        i.setPreco(Double.parseDouble(txtPreco.getText().trim()));
+        String statusSelecionado = (String) cmbStatus.getSelectedItem();
+        int statusBanco = statusSelecionado.equalsIgnoreCase("disponível") ? 1 : 0;
+        i.setStatus(statusBanco);
+        i.setQtdEstoque(Integer.parseInt(txtQtdEstoque.getText().trim()));
+
+        String desktopPath = System.getProperty("user.home") + "/Desktop";
+        File destinoPasta = new File(desktopPath + "/imagensRestaurante");
+
+        if (!destinoPasta.exists()) {
+            destinoPasta.mkdirs();
         }
+
+        File nomeArquivo = new File(imagePath);
+        String apenasNomeArquivo = nomeArquivo.getName();
+        File destinoArquivo = new File(destinoPasta, apenasNomeArquivo);
+        java.nio.file.Files.copy(nomeArquivo.toPath(), destinoArquivo.toPath(), 
+                                java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+
+        imagePath = destinoArquivo.getAbsolutePath();
+        i.setImagem(imagePath);
+
+
+        iDAO.inserir(i);
+        JOptionPane.showMessageDialog(null, "Item cadastrado com sucesso!", 
+                                      "Item Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+        limparFormulario();
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Insira dados numéricos válidos!", 
+                                      "ERRO", JOptionPane.ERROR_MESSAGE);
+    } catch (java.nio.file.NoSuchFileException e) {
+        JOptionPane.showMessageDialog(null, "Arquivo de imagem não encontrado!", 
+                                      "ERRO", JOptionPane.ERROR_MESSAGE);
+    } catch (java.io.IOException e) {
+        JOptionPane.showMessageDialog(null, "Erro ao copiar o arquivo de imagem!", 
+                                      "ERRO", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Erro inesperado: " + e.getMessage(), 
+                                      "ERRO", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnEscolherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscolherActionPerformed
         JFileChooser fileChooser = new JFileChooser();
     
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Imagem", "jpg", "jpeg", "png", "gif");
-        fileChooser.setFileFilter(filter);
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Imagem", "jpg", "jpeg", "png", "gif");
+    fileChooser.setFileFilter(filter);
     
-        int result = fileChooser.showOpenDialog(this);
+    int result = fileChooser.showOpenDialog(this);
     
-        if (result == JFileChooser.APPROVE_OPTION) {
-            try {
-                File selectedFile = fileChooser.getSelectedFile();
+    if (result == JFileChooser.APPROVE_OPTION) {
+        try {
+            File selectedFile = fileChooser.getSelectedFile();
             
-                BufferedImage img = ImageIO.read(selectedFile);
+            String fileName = selectedFile.getName();
             
-                int iconWidth = 24;
-                int iconHeight = 24;
-                
-                Image scaledImage = img.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
-                ImageIcon scaledIcon = new ImageIcon(scaledImage);
-                
-                imageLabel.setIcon(scaledIcon);
-                imageLabel.setSize(iconWidth, iconHeight);
-
+            BufferedImage img = ImageIO.read(selectedFile);
             
-
-                imagePath = selectedFile.getAbsolutePath();
-                
-                String fileName = selectedFile.getName();
-
-                lblNomeImagem.setText(fileName);
+            int iconWidth = 24;
+            int iconHeight = 24;
             
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(this,
-                    "Erro ao carregar a imagem: " + ex.getMessage(),
-                    "Erro", JOptionPane.ERROR_MESSAGE);
-            }
+            Image scaledImage = img.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(scaledImage);
+            
+            imageLabel.setIcon(scaledIcon);
+            imageLabel.setSize(iconWidth, iconHeight);
+            
+            imagePath = selectedFile.getAbsolutePath();
+            
+            lblNomeImagem.setText(fileName);
+            
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this,
+                "Erro ao carregar ou copiar a imagem: " + ex.getMessage(),
+                "Erro", JOptionPane.ERROR_MESSAGE);
         }
+    }
     }//GEN-LAST:event_btnEscolherActionPerformed
 
     /**
