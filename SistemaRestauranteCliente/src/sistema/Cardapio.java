@@ -81,6 +81,7 @@ public class Cardapio extends javax.swing.JFrame {
         List<Item> itens = null;
         
         try {
+            // OBS: Mudar localhost Para o ip do pc (Servidor)
             // Conecta ao servidor
             Socket socket = new Socket("localhost", 1234);
             
