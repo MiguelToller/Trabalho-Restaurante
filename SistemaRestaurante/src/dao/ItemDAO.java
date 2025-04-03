@@ -172,6 +172,7 @@ public class ItemDAO {
                 Item item = new Item();
                 item.setNome(rs.getString("nome"));
                 item.setPreco(rs.getDouble("preco"));
+                item.setImagem(rs.getString("imagem"));
                 
                 itens.add(item);
             }

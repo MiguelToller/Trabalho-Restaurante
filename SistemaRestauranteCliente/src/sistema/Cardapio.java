@@ -51,9 +51,17 @@ public class Cardapio extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Preco"
+                "Nome", "Preco", "Imagem"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblCardapio);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
