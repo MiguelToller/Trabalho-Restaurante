@@ -4,7 +4,7 @@
  */
 package sistema;
 
-import model.Item;
+import model.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +22,8 @@ import java.util.List;
  */
 public class Cardapio extends javax.swing.JFrame {
     private DefaultTableModel tableModel;
-    private JTable tabela;
+    private Carrinho carrinho;
+    private List<Item> listaItens;
     
     /**
      * Creates new form Cardapio
@@ -29,7 +31,33 @@ public class Cardapio extends javax.swing.JFrame {
     public Cardapio() {
         initComponents();
         tableModel = (DefaultTableModel) tblCardapio.getModel();
+        carrinho = new Carrinho();
+        this.listaItens = new ArrayList<>();
+        //Carrega o cardapio ao inicializar
         carregarCardapio();
+        
+        // Adicionar painel de controles
+        //JPanel painelControles = new JPanel();
+        
+        //spinnerQuantidade = new JSpinner(new SpinnerNumberModel(1, 1, 10, 1));
+        //painelControles.add(new JLabel("Quantidade:"));
+        //painelControles.add(spinnerQuantidade);
+        
+        //JButton btnAdicionar = new JButton("Adicionar ao Carrinho");
+        btnAdicionar.addActionListener(e -> adicionarAoCarrinho());
+        //painelControles.add(btnAdicionar);
+
+        //JButton btnVerCarrinho = new JButton("Ver Carrinho");
+        btnVerCarrinho.addActionListener(e -> abrirTelaCarrinho());
+        //painelControles.add(btnVerCarrinho);
+
+        // Adicionar painel ao layout
+        //getContentPane().add(painelControles, BorderLayout.SOUTH);
+
+        
+        
+        // Centralizar a janela
+        //setLocationRelativeTo(null);
     }
     
     /**
@@ -43,9 +71,18 @@ public class Cardapio extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCardapio = new javax.swing.JTable();
+        lblCardapio = new javax.swing.JLabel();
+        painelControles = new javax.swing.JPanel();
+        lblQuantidade = new javax.swing.JLabel();
+        spinnerQuantidade = new javax.swing.JSpinner();
+        btnAdicionar = new javax.swing.JButton();
+        btnVerCarrinho = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cardapio");
+        setLocation(new java.awt.Point(0, 0));
 
+        tblCardapio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         tblCardapio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -64,21 +101,74 @@ public class Cardapio extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblCardapio);
 
+        lblCardapio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblCardapio.setText("Cradapio");
+
+        painelControles.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblQuantidade.setText("Quantidade:");
+
+        spinnerQuantidade.setName(""); // NOI18N
+
+        btnAdicionar.setText("Adicionar ao Carrinho");
+
+        btnVerCarrinho.setText("Ver Carrinho");
+
+        javax.swing.GroupLayout painelControlesLayout = new javax.swing.GroupLayout(painelControles);
+        painelControles.setLayout(painelControlesLayout);
+        painelControlesLayout.setHorizontalGroup(
+            painelControlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelControlesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelControlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(painelControlesLayout.createSequentialGroup()
+                        .addComponent(lblQuantidade)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(spinnerQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVerCarrinho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        painelControlesLayout.setVerticalGroup(
+            painelControlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelControlesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelControlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblQuantidade)
+                    .addComponent(spinnerQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnAdicionar)
+                .addGap(18, 18, 18)
+                .addComponent(btnVerCarrinho)
+                .addContainerGap(163, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(painelControles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(158, 158, 158)
+                        .addComponent(lblCardapio)))
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(lblCardapio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(painelControles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         pack();
@@ -152,7 +242,14 @@ public class Cardapio extends javax.swing.JFrame {
             protected void done() {
                 try {
                     List<Item> itens = get();
-                    exibirItensNaTabela(itens);
+                    
+                    if (itens != null) {
+                        listaItens = itens;
+                        exibirItensNaTabela(listaItens);
+                    } else {
+                        listaItens = new ArrayList<>(); // Evita que seja nula
+                    }
+                    //exibirItensNaTabela(itens);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(Cardapio.this, 
                             "Erro ao carregar cardápio: " + e.getMessage(), 
@@ -162,6 +259,47 @@ public class Cardapio extends javax.swing.JFrame {
         };
         
         worker.execute();
+    }
+    
+     // Método para adicionar item ao carrinho
+    private void adicionarAoCarrinho() {
+        int linhaSelecionada = tblCardapio.getSelectedRow();
+        if (linhaSelecionada == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um item do cardápio!");
+            return;
+        }
+        
+        // Pegar os dados do item selecionado
+        String nome = (String) tableModel.getValueAt(linhaSelecionada, 0);
+        String precoStr = (String) tableModel.getValueAt(linhaSelecionada, 1);
+        precoStr = precoStr.replace("R$ ", "").replace(",", ".");
+        double preco = Double.parseDouble(precoStr);
+        
+        // Obter a quantidade selecionada
+        int quantidade = (int) spinnerQuantidade.getValue();
+        
+        // Buscar o item na lista de itens
+        Item itemSelecionado = null;
+        for (Item item : listaItens) {
+            if (item.getNome().equals(nome)) {
+                itemSelecionado = item;
+                break;
+            }
+        }
+        
+        if (itemSelecionado != null) {
+            // Adicionar o item ao carrinho conforme a quantidade
+            for (int i = 0; i < quantidade; i++) {
+                carrinho.adicionarItem(itemSelecionado);
+            }
+            
+            JOptionPane.showMessageDialog(this, quantidade + " x " + nome + " adicionado ao carrinho!");
+        }
+    }
+
+    // Método para abrir a tela do carrinho
+    private void abrirTelaCarrinho() {
+        TelaCarrinho telaCarrinho = new TelaCarrinho(this, carrinho);
     }
     
     /**
@@ -202,7 +340,13 @@ public class Cardapio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnVerCarrinho;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCardapio;
+    private javax.swing.JLabel lblQuantidade;
+    private javax.swing.JPanel painelControles;
+    private javax.swing.JSpinner spinnerQuantidade;
     private javax.swing.JTable tblCardapio;
     // End of variables declaration//GEN-END:variables
 }

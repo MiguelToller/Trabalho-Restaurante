@@ -19,6 +19,20 @@ public class Item implements Serializable{
     private int qtdEstoque;
     private String imagem;
 
+    public Item() {
+    }
+    
+    public Item(String nome, double preco) {
+        this.nome = nome;
+        this.preco = preco;
+    }
+    
+    public Item(int id, String nome, double preco) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+    }
+    
     public int getId() {
         return id;
     }
@@ -78,5 +92,19 @@ public class Item implements Serializable{
     @Override
     public String toString() {
         return nome + " - R$ " + String.format("%.2f", preco);
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        
+        Item item = (Item) obj;
+        return id == item.id;
+    }
+    
+    @Override
+    public int hashCode() {
+        return id;
     }
 }
