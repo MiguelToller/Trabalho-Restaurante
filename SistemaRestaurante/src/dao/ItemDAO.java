@@ -164,7 +164,7 @@ public class ItemDAO {
     
     public List<Item> listarCardapioDisponivel() {
         List<Item> itens = new ArrayList<>();
-        String sql = "SELECT nome, preco FROM item WHERE status = 1";
+        String sql = "SELECT nome, preco, imagem FROM item WHERE status = 1 ORDER BY categoria";
         
         try (PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()) {

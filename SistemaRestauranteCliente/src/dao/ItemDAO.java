@@ -96,7 +96,7 @@ public class ItemDAO {
     }
 
     public List<Item> getTodosItens() {
-        String sql = "SELECT * FROM Item";
+        String sql = "SELECT * FROM Item WHERE Status = 1 ORDER BY Categoria";
         List<Item> listaItens = new ArrayList<>();
         
         try (PreparedStatement stmt = conn.prepareStatement(sql);
