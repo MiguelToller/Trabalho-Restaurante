@@ -14,6 +14,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
+import javax.swing.table.TableCellRenderer;
+
 
 /**
  *
@@ -21,15 +23,38 @@ import java.util.List;
  */
 public class Cardapio extends javax.swing.JFrame {
     private DefaultTableModel tableModel;
-    private JTable tabela;
+    
     
     /**
      * Creates new form Cardapio
      */
     public Cardapio() {
         initComponents();
+        personalizarTabela();
         tableModel = (DefaultTableModel) tblCardapio.getModel();
         carregarCardapio();
+    }
+    
+    private void personalizarTabela() {
+        tblCardapio.getColumnModel().getColumn(2).setCellRenderer(new TableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                    boolean isSelected, boolean hasFocus, int row, int column) {
+                JLabel label = new JLabel();
+                if (value != null) {
+                    try {
+                        ImageIcon icon = new ImageIcon(value.toString());
+                        Image img = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                        label.setIcon(new ImageIcon(img));
+                    } catch (Exception e) {
+                        label.setText("Erro ao carregar");
+                    }
+                }
+                label.setHorizontalAlignment(JLabel.CENTER);
+                return label;
+            }
+        });
+
     }
     
     /**
@@ -128,7 +153,8 @@ public class Cardapio extends javax.swing.JFrame {
             for (Item item : itens) {
                 Object[] linha = {
                     item.getNome(),
-                    String.format("R$ %.2f", item.getPreco())
+                    String.format("R$ %.2f", item.getPreco()),
+                    item.getImagem()
                 };
                 tableModel.addRow(linha);
             }
