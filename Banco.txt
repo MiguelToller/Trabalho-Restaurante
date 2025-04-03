@@ -28,9 +28,6 @@ CREATE TABLE Pedido (
     REFERENCES `Carrinho` (`id`)
 );
 
-drop table Pedido;
-drop table itemcarrinho;
-
 CREATE TABLE ItemCarrinho (
   `itemCarrinhoId` INT NOT NULL,
   `idItem` INT UNSIGNED NOT NULL,
