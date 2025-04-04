@@ -88,11 +88,11 @@ public class Cardapio extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Preco", "Imagem"
+                "Id", "Nome", "Preco", "Imagem"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -217,11 +217,16 @@ public class Cardapio extends javax.swing.JFrame {
         if (itens != null) {
             for (Item item : itens) {
                 Object[] linha = {
+                    item.getId(),
                     item.getNome(),
                     String.format("R$ %.2f", item.getPreco())
                 };
                 tableModel.addRow(linha);
             }
+            
+            tblCardapio.getColumnModel().getColumn(0).setMinWidth(0);
+            tblCardapio.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblCardapio.getColumnModel().getColumn(0).setWidth(0);
             
             // Seleciona o primeiro item, se houver
             if (tableModel.getRowCount() > 0) {
@@ -261,7 +266,7 @@ public class Cardapio extends javax.swing.JFrame {
         worker.execute();
     }
     
-     // Método para adicionar item ao carrinho
+    // Método para adicionar item ao carrinho
     private void adicionarAoCarrinho() {
         int linhaSelecionada = tblCardapio.getSelectedRow();
         if (linhaSelecionada == -1) {
@@ -270,8 +275,9 @@ public class Cardapio extends javax.swing.JFrame {
         }
         
         // Pegar os dados do item selecionado
-        String nome = (String) tableModel.getValueAt(linhaSelecionada, 0);
-        String precoStr = (String) tableModel.getValueAt(linhaSelecionada, 1);
+        int id = (int) tableModel.getValueAt(linhaSelecionada, 0); // <- PEGA O ID CERTO
+        String nome = (String) tableModel.getValueAt(linhaSelecionada, 1);
+        String precoStr = (String) tableModel.getValueAt(linhaSelecionada, 2);
         precoStr = precoStr.replace("R$ ", "").replace(",", ".");
         double preco = Double.parseDouble(precoStr);
         
@@ -281,7 +287,7 @@ public class Cardapio extends javax.swing.JFrame {
         // Buscar o item na lista de itens
         Item itemSelecionado = null;
         for (Item item : listaItens) {
-            if (item.getNome().equals(nome)) {
+            if (item.getId() == id) {
                 itemSelecionado = item;
                 break;
             }

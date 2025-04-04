@@ -25,7 +25,7 @@ public class PedidoDAO {
         this.conn = this.conexao.getConexao();
     }
 
-    public void inserir(Pedido pedido) {
+       public boolean inserir(Pedido pedido) {
         String sql = "INSERT INTO Pedido (valorTotal, idCarrinho) VALUES (?, ?)";
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -38,8 +38,10 @@ public class PedidoDAO {
             if (rs.next()) {
                 pedido.setId(rs.getInt(1));
             }
+            return true;
         } catch (SQLException ex) {
             System.out.println("Erro ao inserir pedido: " + ex.getMessage());
+            return false;
         }
     }
 

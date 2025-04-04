@@ -4,15 +4,18 @@
  */
 package model;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  *
  * @author Eduardo
  */
-public class Pedido {
+public class Pedido implements Serializable{
     private int id;
     private double valorTotal;
     private Carrinho carrinho;
-
+       
     public int getId() {
         return id;
     }

@@ -11,7 +11,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -48,10 +50,14 @@ public class TelaCarrinho extends javax.swing.JDialog {
         setLayout(new BorderLayout());
         
         // Criar a tabela
-        String[] colunas = {"Nome", "Preço", "Quantidade", "Subtotal"};
+        String[] colunas = { "ID", "Nome", "Quantidade", "Subtotal" };
         tableModel = new DefaultTableModel(colunas, 0);
         tabelaCarrinho = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(tabelaCarrinho);
+        
+        tabelaCarrinho.getColumnModel().getColumn(0).setMinWidth(0);
+        tabelaCarrinho.getColumnModel().getColumn(0).setMaxWidth(0);
+        tabelaCarrinho.getColumnModel().getColumn(0).setWidth(0);
         
         // Painel de botões
         JPanel painelBotoes = new JPanel();
@@ -114,40 +120,33 @@ public class TelaCarrinho extends javax.swing.JDialog {
 
     private void atualizarTabela() {
         tableModel.setRowCount(0);
-        
-        // Agrupar itens por nome para exibir quantidade
+
+        // Agrupar itens por ID
         List<Item> itens = carrinho.getItens();
+        // Usar um HashMap para agrupar os itens por ID
+        Map<Integer, Integer> quantidadePorItem = new HashMap<>();
+        Map<Integer, Double> subtotalPorItem = new HashMap<>();
+        Map<Integer, String> nomePorItem = new HashMap<>();
+
+        // Contar quantidades e calcular subtotais
         for (Item item : itens) {
-            // Verificar se o item já está na tabela
-            boolean encontrado = false;
-            for (int i = 0; i < tableModel.getRowCount(); i++) {
-                String nome = (String) tableModel.getValueAt(i, 0);
-                if (nome.equals(item.getNome())) {
-                    // Incrementar quantidade
-                    int qtd = (int) tableModel.getValueAt(i, 2);
-                    double preco = item.getPreco();
-                    double subtotal = preco * (qtd + 1);
-                    
-                    tableModel.setValueAt(qtd + 1, i, 2);
-                    tableModel.setValueAt(subtotal, i, 3);
-                    encontrado = true;
-                    break;
-                }
-            }
-            
-            if (!encontrado) {
-                // Adicionar novo item
-                Object[] linha = {
-                    item.getNome(),
-                    item.getPreco(),
-                    1,
-                    item.getPreco()
-                };
-                tableModel.addRow(linha);
-            }
+            int id = item.getId();
+            quantidadePorItem.put(id, quantidadePorItem.getOrDefault(id, 0) + 1);
+            subtotalPorItem.put(id, subtotalPorItem.getOrDefault(id, 0.0) + item.getPreco());
+            nomePorItem.put(id, item.getNome());
         }
-        
-        // Atualizar valor total
+
+        // Adicionar linhas na tabela
+        for (Integer id : quantidadePorItem.keySet()) {
+            Object[] linha = {
+                id,                           // ID (oculto)
+                nomePorItem.get(id),          // Nome
+                quantidadePorItem.get(id),    // Quantidade
+                subtotalPorItem.get(id)       // Subtotal
+            };
+            tableModel.addRow(linha);
+        }
+
         atualizarTotal();
     }
     
@@ -159,41 +158,25 @@ public class TelaCarrinho extends javax.swing.JDialog {
     private void removerItem() {
         int linhaSelecionada = tabelaCarrinho.getSelectedRow();
         if (linhaSelecionada >= 0) {
-            String nomeSelecionado = (String) tableModel.getValueAt(linhaSelecionada, 0);
-            int quantidadeAtual = (int) tableModel.getValueAt(linhaSelecionada, 2);
+            int idSelecionado = (int) tableModel.getValueAt(linhaSelecionada, 0); // ID está na coluna 0
+            int quantidadeAtual = (int) tableModel.getValueAt(linhaSelecionada, 2); // Qtd na coluna 2
 
-            // Se tiver mais de um, diminui a quantidade
-            if (quantidadeAtual > 1) {
-                // Diminui a quantidade na tabela
-                tableModel.setValueAt(quantidadeAtual - 1, linhaSelecionada, 2);
-
-                // Recalcula o subtotal
-                double preco = (double) tableModel.getValueAt(linhaSelecionada, 1);
-                double novoSubtotal = preco * (quantidadeAtual - 1);
-                tableModel.setValueAt(novoSubtotal, linhaSelecionada, 3);
-
-                // Remove um item do carrinho com esse nome
-                for (Item item : new ArrayList<>(carrinho.getItens())) {
-                    if (item.getNome().equals(nomeSelecionado)) {
-                        carrinho.removerItem(item);
-                        break; // Remove apenas um item por vez
-                    }
-                }
-            } else {
-                // Se só tem um, remove a linha inteira
-                tableModel.removeRow(linhaSelecionada);
-
-                // Remove o último item com esse nome do carrinho
-                for (Item item : new ArrayList<>(carrinho.getItens())) {
-                    if (item.getNome().equals(nomeSelecionado)) {
-                        carrinho.removerItem(item);
-                        break;
-                    }
+            // Encontrar o item no carrinho para remover
+            Item itemParaRemover = null;
+            for (Item item : carrinho.getItens()) {
+                if (item.getId() == idSelecionado) {
+                    itemParaRemover = item;
+                    break;
                 }
             }
 
-            // Atualiza o total
-            atualizarTotal();
+            if (itemParaRemover != null) {
+                // Remove um item com esse ID do carrinho
+                carrinho.removerItem(itemParaRemover);
+
+                // Atualiza a tabela com os novos dados
+                atualizarTabela();
+            }
         } else {
             JOptionPane.showMessageDialog(this, 
                     "Selecione um item para remover!", 

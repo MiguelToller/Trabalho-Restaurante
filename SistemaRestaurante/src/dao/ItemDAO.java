@@ -164,12 +164,13 @@ public class ItemDAO {
     
     public List<Item> listarCardapioDisponivel() {
         List<Item> itens = new ArrayList<>();
-        String sql = "SELECT nome, preco, imagem FROM item WHERE status = 1 ORDER BY categoria";
+        String sql = "SELECT id, nome, preco, imagem FROM item WHERE status = 1 ORDER BY categoria";
         
         try (PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Item item = new Item();
+                item.setId(rs.getInt("id"));
                 item.setNome(rs.getString("nome"));
                 item.setPreco(rs.getDouble("preco"));
                 item.setImagem(rs.getString("imagem"));
