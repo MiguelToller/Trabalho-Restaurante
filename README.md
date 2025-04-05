@@ -7,29 +7,27 @@ Este projeto é um exemplo didático utilizado na disciplina de **Projeto de Sof
 
 ## Funcionalidades Administrador
 
-- Cadastro de Itens com os campos:
-  - Nome
-  - Categoria
-  - Preço
-  - Status
-  - Quantidade em Estoque
- 
-- Editar Itens:
-
-- Excluir Itens:
-
-- Ver pedidos:
+- Cadastrar Itens
+- Editar Itens
+- Excluir Itens
+- Ver pedidos
 
 ---
 
 ## Funcionalidade Cliente
 
-- Ver cardápio:
-
-- Ver carrinho:
-
-- Adicionar itens ao carrinho:
-
+- Ver cardápio
+  
+  - Adicionar itens ao carrinho
+    
+  - Ver Pedidos
+    - Finalizar Todos os Pedidos
+    
+  - Ver carrinho
+    - Remover Item
+    - Finalizar Pedido
+    - Voltar ao Cardapio
+    
 ---
 
 ## Diagrama de Classes
@@ -55,7 +53,7 @@ Ver pedidos
 
 ---
 
-## Diagrama de Sequência
+## Diagrama de Sequência Administrador
 
 O diagrama de sequência descreve a interação entre os objetos ao longo do tempo, detalhando como as solicitações de cadastro, edição e exclusão de produtos fluem no sistema.
 
@@ -72,6 +70,21 @@ O diagrama de sequência descreve a interação entre os objetos ao longo do tem
 ### ExcluirItem
 
 ![DS - Excluir Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/ExcluirItem%20Sequencia.png)
+
+---
+
+## Diagrama de Sequência Cliente
+
+Adicionar ao Carrinho
+
+Ver Carrinho
+- Remover item
+  - BRANCH: NAO TEM ITEM
+- Finalizar pedido
+  - BRANCH: NAO TEM PEDIDO
+- Voltar ao cardápio
+
+Ver Pedidos
 
 ---
 
@@ -159,8 +172,8 @@ Interfaces gráficas responsáveis pela interação com o usuário para entrada,
 **Interfaces Gráficas (Cliente)**  
 Interfaces gráficas responsáveis por exibir o cardápio, o menu principal e a tela do carrinho.
 - **`Cardapio.form`**
-- **`MenuPrincipal.form`**
 - **`TelaCarrinho.form`**
+- **`TelaPedidos.form`**
 
 **Acesso ao Banco de Dados**  
 Classes responsáveis por interagir com o banco de dados.
