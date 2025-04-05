@@ -33,16 +33,19 @@ public class TelaCarrinho extends javax.swing.JDialog {
     private JLabel lblTotal;
     private Carrinho carrinho;
     private Cardapio telaCardapio;
+    private String uuidCliente;
     
     /**
      * Creates new form TelaCarrinho
      * @param parent
      * @param carrinho
+     * @param uuidCliente
      */
-    public TelaCarrinho(Cardapio parent, Carrinho carrinho) {
+    public TelaCarrinho(Cardapio parent, Carrinho carrinho, String uuidCliente) {
         super(parent, "Carrinho de Compras", true);
         this.carrinho = carrinho;
         this.telaCardapio = parent;
+        this.uuidCliente = uuidCliente;
         
         // Configuração da janela
         setSize(500, 400);
@@ -228,6 +231,7 @@ public class TelaCarrinho extends javax.swing.JDialog {
             model.Pedido pedido = new model.Pedido();
             pedido.setCarrinho(carrinho);
             pedido.setValorTotal(carrinho.calcularTotal());
+            pedido.setUuidCliente(uuidCliente);
             
             // Envia comando para fazer pedido
             out.writeObject("PEDIDO");

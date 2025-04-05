@@ -116,6 +116,7 @@
                       </Group>
                       <Component id="btnAdicionar" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnVerCarrinho" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnMeusPedidos" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="38" max="32767" attributes="0"/>
               </Group>
@@ -133,7 +134,9 @@
                   <Component id="btnAdicionar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnVerCarrinho" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="163" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnMeusPedidos" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="122" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -157,6 +160,11 @@
         <Component class="javax.swing.JButton" name="btnVerCarrinho">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ver Carrinho"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnMeusPedidos">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Meus Pedidos"/>
           </Properties>
         </Component>
       </SubComponents>

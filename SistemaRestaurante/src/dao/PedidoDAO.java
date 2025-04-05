@@ -59,10 +59,12 @@ public class PedidoDAO {
                 }
 
                 // 3. Agora insere o pedido com o ID do carrinho
-                String sqlPedido = "INSERT INTO Pedido (valorTotal, idCarrinho) VALUES (?, ?)";
+                String sqlPedido = "INSERT INTO Pedido (valorTotal, idCarrinho, uuidCliente, status) VALUES (?, ?, ?, ?)";
                 PreparedStatement stmtPedido = conn.prepareStatement(sqlPedido, Statement.RETURN_GENERATED_KEYS);
                 stmtPedido.setDouble(1, pedido.getValorTotal());
                 stmtPedido.setInt(2, idCarrinho);
+                stmtPedido.setString(3, pedido.getUuidCliente()); // Aqui o UUID do "cliente"
+                stmtPedido.setString(4, "Em andamento");
                 stmtPedido.executeUpdate();
 
                 // Obtém o ID gerado para o pedido
@@ -106,6 +108,7 @@ public class PedidoDAO {
 
             if (rs.next()) {
                 Pedido pedido = new Pedido();
+                pedido.setUuidCliente(rs.getString("uuidCliente"));
                 pedido.setId(id);
                 pedido.setValorTotal(rs.getDouble("valorTotal"));
 
@@ -132,6 +135,7 @@ public class PedidoDAO {
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Pedido pedido = new Pedido();
+                pedido.setUuidCliente(rs.getString("uuidCliente"));
                 pedido.setId(rs.getInt("id"));
                 pedido.setValorTotal(rs.getDouble("valorTotal"));
 
@@ -171,4 +175,75 @@ public class PedidoDAO {
             System.out.println("Erro ao excluir pedido: " + ex.getMessage());
         }
     }
+    
+    public List<Pedido> listarPedidosPorUUID(String uuid) {
+        List<Pedido> pedidos = new ArrayList<>();
+        String sql = "SELECT * FROM Pedido WHERE uuidCliente = ? AND status = 'Em andamento'";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, uuid);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Pedido pedido = new Pedido();
+                pedido.setId(rs.getInt("id"));
+                pedido.setValorTotal(rs.getDouble("valorTotal"));
+                pedido.setUuidCliente(rs.getString("uuidCliente"));
+                pedido.setStatus(rs.getString("status"));
+
+                Carrinho carrinho = new Carrinho();
+                carrinho.setId(rs.getInt("idCarrinho"));
+                pedido.setCarrinho(carrinho);
+
+                pedidos.add(pedido);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro ao listar pedidos por UUID: " + ex.getMessage());
+        }
+
+        return pedidos;
+    }
+    
+    public List<Pedido> listarTodosPedidosEmAndamento() {
+        List<Pedido> lista = new ArrayList<>();
+        String sql = "SELECT * FROM Pedido WHERE status = 'Em andamento'";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Pedido pedido = new Pedido();
+                pedido.setId(rs.getInt("id"));
+                pedido.setValorTotal(rs.getDouble("valorTotal"));
+                pedido.setUuidCliente(rs.getString("uuidCliente"));
+                pedido.setStatus(rs.getString("status"));
+
+                Carrinho carrinho = new Carrinho();
+                carrinho.setId(rs.getInt("idCarrinho"));
+                pedido.setCarrinho(carrinho);
+
+                lista.add(pedido);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Erro ao listar pedidos em andamento: " + ex.getMessage());
+        }
+
+        return lista;
+    }
+
+    // Finaliza todos os pedidos com UUID específico
+    public boolean finalizarTodosPedidos(String uuid) {
+        String sql = "UPDATE Pedido SET status = 'Finalizado' WHERE uuidCliente = ? AND status = 'Em andamento'";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, uuid);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Erro ao finalizar pedidos: " + ex.getMessage());
+            return false;
+        }
+    }
+    
 }

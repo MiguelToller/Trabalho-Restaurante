@@ -4,17 +4,89 @@
  */
 package sistema;
 
+import dao.PedidoDAO;
+import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import model.Pedido;
+
 /**
  *
  * @author Eduardo
  */
 public class VerPedidos extends javax.swing.JFrame {
-
+    private JTable tabelaPedidos;
+    private PedidoDAO pedidoDAO;
+    private List<Pedido> pedidosAtuais = new ArrayList<>();
+    private JButton btnAtualizar;
+    
     /**
      * Creates new form VerPedidos
      */
     public VerPedidos() {
         initComponents();
+        setTitle("Pedidos em Andamento");
+        setSize(700, 400);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        pedidoDAO = new PedidoDAO();
+        tabelaPedidos = new JTable();
+        JScrollPane scrollPane = new JScrollPane(tabelaPedidos);
+
+        btnAtualizar = new JButton("Atualizar");
+        btnAtualizar.addActionListener(e -> carregarPedidos());
+
+        JPanel painelBotoes = new JPanel();
+        painelBotoes.add(btnAtualizar);
+
+        add(scrollPane, BorderLayout.CENTER);
+        add(painelBotoes, BorderLayout.SOUTH);
+
+        carregarPedidos();
+
+        // Atualiza automaticamente a cada 10 segundos
+        Timer timer = new Timer(10000, e -> carregarPedidos());
+        timer.start();
+
+        setVisible(true);
+    }
+
+    private void carregarPedidos() {
+        List<Pedido> novosPedidos = pedidoDAO.listarTodosPedidosEmAndamento();
+
+        // Se os pedidos forem iguais aos anteriores, não faz nada
+        if (iguais(pedidosAtuais, novosPedidos)) {
+            return;
+        }
+
+        // Atualiza a tabela e a lista atual
+        pedidosAtuais = novosPedidos;
+
+        DefaultTableModel model = new DefaultTableModel(new Object[]{"ID", "UUID Cliente", "Valor Total", "Status"}, 0);
+
+        for (Pedido p : novosPedidos) {
+            model.addRow(new Object[]{p.getId(), p.getUuidCliente(), p.getValorTotal(), p.getStatus()});
+        }
+
+        tabelaPedidos.setModel(model);
+    }
+    
+    private boolean iguais(List<Pedido> a, List<Pedido> b) {
+        if (a.size() != b.size()) return false;
+
+        for (int i = 0; i < a.size(); i++) {
+            Pedido p1 = a.get(i);
+            Pedido p2 = b.get(i);
+
+            if (p1.getId() != p2.getId()) return false;
+            if (!p1.getStatus().equals(p2.getStatus())) return false;
+        }
+
+        return true;
     }
 
     /**
@@ -32,7 +104,7 @@ public class VerPedidos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 404, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

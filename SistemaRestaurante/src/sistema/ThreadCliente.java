@@ -42,6 +42,26 @@ public class ThreadCliente extends Thread{
                 case "PEDIDO":
                     processarComandoPedido(in, out);
                     break;
+                case "LISTAR_PEDIDOS":
+                    String uuid = (String) in.readObject();
+                    List<Pedido> pedidos = new PedidoDAO().listarPedidosPorUUID(uuid);
+                    out.writeObject(pedidos);
+                    break;
+                case "LISTAR_ITENS_PEDIDO":
+                    int idPedido = (int) in.readObject();
+                    ItemCarrinhoDAO icDAO = new ItemCarrinhoDAO();
+
+                    // Chama o DAO para buscar os itens
+                    List<ItemCarrinho> itens = icDAO.listarPorPedido(idPedido);
+
+                    out.writeObject(itens);
+                    out.flush();
+                    break; // <- ESSENCIAL!
+                case "FINALIZAR_TODOS_PEDIDOS":
+                    String uuidFinalizar = (String) in.readObject();
+                    boolean todosFinalizados = new PedidoDAO().finalizarTodosPedidos(uuidFinalizar);
+                    out.writeObject(todosFinalizados ? "Todos os pedidos foram finalizados!" : "Nenhum pedido finalizado.");
+                    break;
                 default:
                     System.out.println("Comando desconhecido: " + comando);
                     out.writeObject("ERRO: Comando desconhecido");

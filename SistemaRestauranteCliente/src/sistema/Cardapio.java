@@ -15,6 +15,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+ import java.util.UUID;
 
 /**
  *
@@ -24,11 +25,15 @@ public class Cardapio extends javax.swing.JFrame {
     private DefaultTableModel tableModel;
     private Carrinho carrinho;
     private List<Item> listaItens;
+    private String uuidCliente;
     
     /**
      * Creates new form Cardapio
      */
     public Cardapio() {
+        this.uuidCliente = UUID.randomUUID().toString();
+        System.out.println("UUID da sessão do cliente: " + uuidCliente);
+        
         initComponents();
         tableModel = (DefaultTableModel) tblCardapio.getModel();
         carrinho = new Carrinho();
@@ -51,6 +56,10 @@ public class Cardapio extends javax.swing.JFrame {
         btnVerCarrinho.addActionListener(e -> abrirTelaCarrinho());
         //painelControles.add(btnVerCarrinho);
 
+        btnMeusPedidos.addActionListener(e -> {
+            new TelaPedidos(this, uuidCliente);
+        });
+        
         // Adicionar painel ao layout
         //getContentPane().add(painelControles, BorderLayout.SOUTH);
 
@@ -77,6 +86,7 @@ public class Cardapio extends javax.swing.JFrame {
         spinnerQuantidade = new javax.swing.JSpinner();
         btnAdicionar = new javax.swing.JButton();
         btnVerCarrinho = new javax.swing.JButton();
+        btnMeusPedidos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cardapio");
@@ -114,6 +124,8 @@ public class Cardapio extends javax.swing.JFrame {
 
         btnVerCarrinho.setText("Ver Carrinho");
 
+        btnMeusPedidos.setText("Meus Pedidos");
+
         javax.swing.GroupLayout painelControlesLayout = new javax.swing.GroupLayout(painelControles);
         painelControles.setLayout(painelControlesLayout);
         painelControlesLayout.setHorizontalGroup(
@@ -126,7 +138,8 @@ public class Cardapio extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(spinnerQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVerCarrinho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnVerCarrinho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMeusPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         painelControlesLayout.setVerticalGroup(
@@ -140,7 +153,9 @@ public class Cardapio extends javax.swing.JFrame {
                 .addComponent(btnAdicionar)
                 .addGap(18, 18, 18)
                 .addComponent(btnVerCarrinho)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnMeusPedidos)
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -305,7 +320,7 @@ public class Cardapio extends javax.swing.JFrame {
 
     // Método para abrir a tela do carrinho
     private void abrirTelaCarrinho() {
-        TelaCarrinho telaCarrinho = new TelaCarrinho(this, carrinho);
+        TelaCarrinho telaCarrinho = new TelaCarrinho(this, carrinho, this.uuidCliente);
     }
     
     /**
@@ -347,6 +362,7 @@ public class Cardapio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnMeusPedidos;
     private javax.swing.JButton btnVerCarrinho;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCardapio;

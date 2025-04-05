@@ -27,7 +27,7 @@ public class ExcluirItem extends javax.swing.JFrame {
 
     private void preencherComboItens() {
         ItemDAO iDAO = new ItemDAO();
-        List<Item> ListaItens = iDAO.getTodosItens();
+        List<Item> ListaItens = iDAO.getTodosItensPorCategoria();
         
         for (Item i : ListaItens) {
             cmbItem.addItem(i.getNome()); 
