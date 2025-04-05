@@ -14,44 +14,56 @@ Este projeto é um exemplo didático utilizado na disciplina de **Projeto de Sof
 
 ---
 
-## Funcionalidade Cliente
+## Funcionalidades Cliente
 
-- Ver cardápio
-  
-  - Adicionar itens ao carrinho
-    
-  - Ver Pedidos
-    - Finalizar Todos os Pedidos
-    
-  - Ver carrinho
-    - Remover Item
-    - Finalizar Pedido
-    - Voltar ao Cardapio
+- Adicionar itens ao carrinho
+- Ver Pedidos
+- Ver carrinho
     
 ---
 
-## Diagrama de Classes
+## Diagrama de Classes Administrador
 
 O diagrama de classes ilustra a estrutura do sistema, com a classe `Item` representando os produtos, e a classe `ItemDAO` sendo responsável pela persistência dos dados no banco. 
 As classes `CadastrarItemForm`, `EditarItemForm` e `ExcluirItemForm` representam as interfaces gráficas que interagem com o usuário.
 
 ### Astah
 
-![C - Cadastro de Produto](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Classe/CadastrarItem%20Diagram.png)
+![C - Cadastrar Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Classe/CadastrarItem%20Diagram.png)
 
 ---
 
-![C - Cadastro de Produto](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Classe/EditarItem%20Diagram.png)
+![C - Editar Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Classe/EditarItem%20Diagram.png)
 
 ---
 
-![C - Cadastro de Produto](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Classe/ExcluirItem%20Diagram.png)
+![C - Excluir Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Classe/ExcluirItem%20Diagram.png)
 
 ---
 
 Ver pedidos
 
 ---
+
+## Diagrama de Classes Cliente
+
+O diagrama de classes ilustra a estrutura do sistema, com a classe `Item` representando os produtos, e a classe `ItemDAO` sendo responsável pela persistência dos dados no banco. 
+As classes `Cardapio.form`, `TelaCarrinho.form` e `TelaPedidos.form` representam as interfaces gráficas que interagem com o usuário.
+
+### Astah
+
+Adicionar Item Carrinho
+
+---
+
+Ver Pedidos
+
+---
+
+Ver Carrinho
+
+---
+
 
 ## Diagrama de Sequência Administrador
 
@@ -75,16 +87,36 @@ O diagrama de sequência descreve a interação entre os objetos ao longo do tem
 
 ## Diagrama de Sequência Cliente
 
-Adicionar ao Carrinho
+O diagrama de sequência descreve a interação entre os objetos ao longo do tempo, detalhando como as solicitações de cadastro, edição e exclusão de produtos fluem no sistema.
 
-Ver Carrinho
-- Remover item
-  - BRANCH: NAO TEM ITEM
-- Finalizar pedido
-  - BRANCH: NAO TEM PEDIDO
-- Voltar ao cardápio
+### Adicionar Itens ao Carrinho
 
-Ver Pedidos
+![DS - Adicionar Item]
+
+---
+
+### Ver Carrinho
+
+![DS - Ver Carrinho]
+- remover item
+  - BRANCH: nao tem item
+- finalizar pedido
+  - BRANCH: nao tem pedido
+- voltar ao cardapio
+
+---
+
+### Finalizar Pedido
+
+![DS - Finalizar Pedido]
+- voltar ao cardapio
+- BRANCH: nao tem pedido
+
+
+### Ver Pedidos
+
+![DS - Ver Pedidos]
+- finalizar todos os pedidos
 
 ---
 
