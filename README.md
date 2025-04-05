@@ -27,19 +27,22 @@ Este projeto é um exemplo didático utilizado na disciplina de **Projeto de Sof
 O diagrama de classes ilustra a estrutura do sistema, com a classe `Item` representando os produtos, e a classe `ItemDAO` sendo responsável pela persistência dos dados no banco. 
 As classes `CadastrarItemForm`, `EditarItemForm` e `ExcluirItemForm` representam as interfaces gráficas que interagem com o usuário.
 
-### Astah
+### Cadastrar Item
 
 ![C - Cadastrar Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Classe/CadastrarItem%20Diagram.png)
 
 ---
+### Editar Item
 
 ![C - Editar Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Classe/EditarItem%20Diagram.png)
 
 ---
+### Excluir Item
 
 ![C - Excluir Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Classe/ExcluirItem%20Diagram.png)
 
 ---
+### Ver Pedidos
 
 Ver pedidos
 
@@ -50,17 +53,13 @@ Ver pedidos
 O diagrama de classes ilustra a estrutura do sistema, com a classe `Item` representando os produtos, e a classe `ItemDAO` sendo responsável pela persistência dos dados no banco. 
 As classes `Cardapio.form`, `TelaCarrinho.form` e `TelaPedidos.form` representam as interfaces gráficas que interagem com o usuário.
 
-### Astah
-
-Adicionar Item Carrinho
+### Adicionar Item Carrinho
 
 ---
-
-Ver Pedidos
+### Ver Pedidos
 
 ---
-
-Ver Carrinho
+### Ver Carrinho
 
 ---
 
@@ -69,17 +68,17 @@ Ver Carrinho
 
 O diagrama de sequência descreve a interação entre os objetos ao longo do tempo, detalhando como as solicitações de cadastro, edição e exclusão de produtos fluem no sistema.
 
-### CadastrarItem
+### Cadastrar Item
 
 ![DS - Cadastrar Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/CadastrarItem%20Sequencia.png)
 
 ---
-### EditarItem
+### Editar Item
 
 ![DS - Editar Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/EditarItem%20Sequencia.png)
 
 ---
-### ExcluirItem
+### Excluir Item
 
 ![DS - Excluir Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/ExcluirItem%20Sequencia.png)
 
