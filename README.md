@@ -1,22 +1,34 @@
 
-# Cadastro de Produto com Interface Gráfica (Java + CSV)
+# Cadastro de Produto com Interface Gráfica (Java Swing + MySQL)
 
-Este projeto é um exemplo didático utilizado na disciplina de **Projeto de Software**, com o objetivo de demonstrar a interação entre o **Diagrama de Classes** e o **Diagrama de Sequência**.
-
-A funcionalidade implementada é o **Cadastro de Itens**, onde os dados são inseridos por meio de uma **interface gráfica (Swing)** e armazenados em um banco de dados **MySQL**.
+Este projeto é um exemplo didático utilizado na disciplina de **Projeto de Software**, com o objetivo de demonstrar um Sistema de Pedidos de um restaurante, destacando a interação entre o **Diagrama de Classes** e o **Diagrama de Sequência**.
 
 ---
 
-## Funcionalidade Principal
+## Funcionalidades Administrador
 
-- Cadastro de produto com os campos:
+- Cadastro de Itens com os campos:
   - Nome
   - Categoria
   - Preço
   - Status
   - Quantidade em Estoque
-- Armazenamento dos dados em banco de dados MySQL
-- Interface simples com Java Swing
+ 
+- Editar Itens:
+
+- Excluir Itens:
+
+- Ver pedidos:
+
+---
+
+## Funcionalidade Cliente
+
+- Ver cardápio:
+
+- Ver carrinho:
+
+- Adicionar itens ao carrinho:
 
 ---
 
@@ -39,41 +51,34 @@ As classes `CadastrarItemForm`, `EditarItemForm` e `ExcluirItemForm` representam
 
 ---
 
+Ver pedidos
+
+---
+
 ## Diagrama de Sequência
 
 O diagrama de sequência descreve a interação entre os objetos ao longo do tempo, detalhando como as solicitações de cadastro, edição e exclusão de produtos fluem no sistema.
 
-### Astah
+### CadastrarItem
 
-![DS - Cadastro de Produto](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/CadastrarItem%20Sequencia.png)
-
----
-
-![DS - Cadastro de Produto](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/EditarItem%20Sequencia.png)
+![DS - Cadastrar Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/CadastrarItem%20Sequencia.png)
 
 ---
+### EditarItem
 
-![DS - Cadastro de Produto](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/ExcluirItem%20Sequencia.png)
+![DS - Editar Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/EditarItem%20Sequencia.png)
+
+---
+### ExcluirItem
+
+![DS - Excluir Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/ExcluirItem%20Sequencia.png)
 
 ---
 
 ## Casos de Uso
 
-### 1. Cadastrar Produto
-O usuário insere os dados do produto na interface gráfica, e os dados são salvos no banco de dados MySQL.
 
-### 2. Editar Produto
-O usuário pode modificar as informações de um produto existente.
-
-### 3. Excluir Produto
-O usuário pode remover um produto do sistema.
-
-### 4. Visualizar Produtos
-O sistema permite visualizar os produtos cadastrados.
-
----
-
-![DCS - Cadastro de Produto](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Extra/Diagrama%20UseCase.png)
+![DCS - Casos de Uso](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Extra/Diagrama%20UseCase.png)
 
 ---
 
@@ -144,11 +149,18 @@ Contêm as classes responsáveis pela representação dos dados no sistema.
 - **`ItemCarrinho.java`**
 - **`Pedido.java`**
 
-**Interfaces Gráficas (Swing)**  
-Interfaces gráficas responsáveis pela interação com o usuário para entrada, alteração e exclusão de dados.
+**Interfaces Gráficas (Administrador)**  
+Interfaces gráficas responsáveis pela interação com o usuário para entrada, alteração, exclusão de dados e visualização de pedidos.
 - **`CadastrarItem.form`**
 - **`EditarItem.form`**
 - **`ExcluirItem.form`**
+- **`VerPedidos.form`**
+
+**Interfaces Gráficas (Cliente)**  
+Interfaces gráficas responsáveis por exibir o cardápio, o menu principal e a tela do carrinho.
+- **`Cardapio.form`**
+- **`MenuPrincipal.form`**
+- **`TelaCarrinho.form`**
 
 **Acesso ao Banco de Dados**  
 Classes responsáveis por interagir com o banco de dados.
@@ -175,16 +187,23 @@ Consulte o arquivo [LICENSE](LICENSE) para mais informações.
 ## Autores
 
 **Luiz Miguel Toller Marconatto**  
-**Eduardo Carvalho Ceretta**  
-**Gabriel Machado Orling de Oliveira**  
-
 Curso de Ciência da Computação – Universidade Franciscana (UFN)  
 
 E-mail: luizmigueltoller@gmail.com  
 GitHub: [@MiguelToller](https://github.com/MiguelToller)
 
+---
+
+**Eduardo Carvalho Ceretta**  
+Curso de Ciência da Computação – Universidade Franciscana (UFN)  
+
 E-mail: Duduceretta@gmail.com  
 GitHub: [@Duduceretta](https://github.com/Duduceretta)
+
+---
+
+**Gabriel Machado Orling de Oliveira**  
+Curso de Ciência da Computação – Universidade Franciscana (UFN)  
 
 E-mail: gabrielorling1515@gmail.com  
 GitHub: [@Gorling](https://github.com/Gorling)
