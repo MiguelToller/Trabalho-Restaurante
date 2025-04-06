@@ -118,6 +118,29 @@ public class ItemDAO {
         return listaItens;
     }
     
+    public List<Item> getTodosItensPorCategoria() {
+        String sql = "SELECT * FROM Item ORDER BY categoria";
+        List<Item> listaItens = new ArrayList<>();
+        
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Item item = new Item();
+                item.setId(rs.getInt("id"));
+                item.setNome(rs.getString("nome"));
+                item.setCategoria(rs.getString("categoria"));
+                item.setStatus(rs.getInt("status"));
+                item.setPreco(rs.getDouble("preco"));
+                item.setQtdEstoque(rs.getInt("qtdEstoque"));
+                item.setImagem(rs.getString("imagem"));
+                listaItens.add(item);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro ao consultar itens: " + ex.getMessage());
+        }
+        return listaItens;
+    }
+    
     public void editarItem(Item item) {
         try {
             String sql = "UPDATE Item SET nome = ?, categoria = ?, preco = ?, status = ?, qtdEstoque = ?, "
@@ -160,5 +183,26 @@ public class ItemDAO {
             System.out.println("Erro ao verificar nome: " + ex.getMessage());
             return false;
         }
+    }
+    
+    public List<Item> listarCardapioDisponivel() {
+        List<Item> itens = new ArrayList<>();
+        String sql = "SELECT id, nome, preco, imagem FROM item WHERE status = 1 ORDER BY categoria";
+        
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Item item = new Item();
+                item.setId(rs.getInt("id"));
+                item.setNome(rs.getString("nome"));
+                item.setPreco(rs.getDouble("preco"));
+                item.setImagem(rs.getString("imagem"));
+                
+                itens.add(item);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao listar cardapio: " + e.getMessage());
+        }
+        return itens;
     }
 }

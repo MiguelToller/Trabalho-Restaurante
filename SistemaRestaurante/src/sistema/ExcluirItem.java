@@ -27,7 +27,7 @@ public class ExcluirItem extends javax.swing.JFrame {
 
     private void preencherComboItens() {
         ItemDAO iDAO = new ItemDAO();
-        List<Item> ListaItens = iDAO.getTodosItens();
+        List<Item> ListaItens = iDAO.getTodosItensPorCategoria();
         
         for (Item i : ListaItens) {
             cmbItem.addItem(i.getNome()); 
@@ -45,7 +45,7 @@ public class ExcluirItem extends javax.swing.JFrame {
 
         lblTitulo = new javax.swing.JLabel();
         lblSubTitulo = new javax.swing.JLabel();
-        cmbItem = new javax.swing.JComboBox<>();
+        cmbItem = new javax.swing.JComboBox<String>();
         btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);

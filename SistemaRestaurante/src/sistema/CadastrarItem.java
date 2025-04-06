@@ -5,15 +5,26 @@
 package sistema;
 
 import dao.ItemDAO;
-import javax.swing.JOptionPane;
+import java.awt.Image;
 import model.Item;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.NoSuchFileException;
 
 /**
  *
  * @author Eduardo
  */
 public class CadastrarItem extends javax.swing.JFrame {
-
+    private String imagePath;
     /**
      * Creates new form CadastrarItem
      */
@@ -40,12 +51,14 @@ public class CadastrarItem extends javax.swing.JFrame {
         txtNome = new javax.swing.JTextField();
         txtPreco = new javax.swing.JTextField();
         txtQtdEstoque = new javax.swing.JTextField();
-        txtImagem = new javax.swing.JTextField();
-        cmbCategoria = new javax.swing.JComboBox<>();
-        cmbStatus = new javax.swing.JComboBox<>();
+        cmbCategoria = new javax.swing.JComboBox<String>();
+        cmbStatus = new javax.swing.JComboBox<String>();
         btnSalvar = new javax.swing.JButton();
+        btnEscolher = new javax.swing.JButton();
+        imageLabel = new javax.swing.JLabel();
+        lblNomeImagem = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblTitulo.setText("Cadastrar Item");
@@ -60,16 +73,23 @@ public class CadastrarItem extends javax.swing.JFrame {
 
         lblQtdEstoque.setText("Quantidade Estoque:");
 
-        lblImagem.setText("URL Imagem:");
+        lblImagem.setText("Imagem:");
 
-        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "comida", "bebida", "sobremesa" }));
+        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "comida", "bebida", "sobremesa" }));
 
-        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "disponível", "Indisponível" }));
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "disponível", "Indisponível" }));
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
+            }
+        });
+
+        btnEscolher.setText("Escolher");
+        btnEscolher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEscolherActionPerformed(evt);
             }
         });
 
@@ -107,15 +127,19 @@ public class CadastrarItem extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createSequentialGroup()
                                     .addComponent(lblImagem)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtImagem))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblNomeImagem)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnEscolher))
+                                .addGroup(layout.createSequentialGroup()
                                     .addComponent(lblQtdEstoque)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(txtQtdEstoque))))))
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(imageLabel)
+                .addContainerGap(172, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +169,9 @@ public class CadastrarItem extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblImagem)
-                    .addComponent(txtImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEscolher)
+                    .addComponent(imageLabel)
+                    .addComponent(lblNomeImagem))
                 .addGap(18, 18, 18)
                 .addComponent(btnSalvar)
                 .addContainerGap(30, Short.MAX_VALUE))
@@ -157,43 +183,113 @@ public class CadastrarItem extends javax.swing.JFrame {
     private void limparFormulario(){
         txtNome.setText("");
         txtPreco.setText("");
-        txtImagem.setText("");
+        lblNomeImagem.setText("");
         txtQtdEstoque.setText("");
         cmbCategoria.setSelectedIndex(0);
         cmbStatus.setSelectedIndex(0);
+        imageLabel.setIcon(null);
+        imagePath = "";
     }
     
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         Item i = new Item();
         ItemDAO iDAO = new ItemDAO();
+    
 
-        // Verifica se os campos de texto estão preenchidos
-        if (txtNome.getText().isBlank()|| txtPreco.getText().isBlank()|| 
-                txtQtdEstoque.getText().isBlank()|| txtImagem.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "ERRO", JOptionPane.ERROR_MESSAGE);
-        } else {
-            if (iDAO.isItemCadastrado(txtNome.getText()) == true) {
-                JOptionPane.showMessageDialog(null, "Item ja cadastrado!", "ERRO", JOptionPane.ERROR_MESSAGE);
-            } else {
-                try {
-                    i.setNome(txtNome.getText().strip());
-                    i.setCategoria((String) cmbCategoria.getSelectedItem());
-                    i.setPreco(Double.parseDouble(txtPreco.getText()));
-                    String statusSelecionado = (String) cmbStatus.getSelectedItem();
-                    int statusBanco = statusSelecionado.equals("disponível") ? 1 : 0;
-                    i.setStatus(statusBanco);
-                    i.setQtdEstoque(Integer.parseInt(txtQtdEstoque.getText()));                
-                    i.setImagem(txtImagem.getText());
+    if (txtNome.getText().isBlank() || txtPreco.getText().isBlank() || 
+            txtQtdEstoque.getText().isBlank() || imagePath == null || imagePath.isBlank()) {
+        JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos", "ERRO", JOptionPane.ERROR_MESSAGE);
+        return; 
+    }
 
-                    iDAO.inserir(i);
-                    JOptionPane.showMessageDialog(null, "Item cadastrado com sucesso!", "Item Cadastrado", JOptionPane.INFORMATION_MESSAGE);
-                    limparFormulario();
-                } catch (NumberFormatException e){
-                    JOptionPane.showMessageDialog(null, "Insira dados numéricos válidos!", "ERRO", JOptionPane.ERROR_MESSAGE);
-                }
-            }
+    if (iDAO.isItemCadastrado(txtNome.getText().strip())) {
+        JOptionPane.showMessageDialog(null, "Item já cadastrado!", "ERRO", JOptionPane.ERROR_MESSAGE);
+        return; 
+    }
+
+    try {
+        
+        i.setNome(txtNome.getText().strip());
+        i.setCategoria((String) cmbCategoria.getSelectedItem());
+        i.setPreco(Double.parseDouble(txtPreco.getText().trim()));
+        String statusSelecionado = (String) cmbStatus.getSelectedItem();
+        int statusBanco = statusSelecionado.equalsIgnoreCase("disponível") ? 1 : 0;
+        i.setStatus(statusBanco);
+        i.setQtdEstoque(Integer.parseInt(txtQtdEstoque.getText().trim()));
+
+        String desktopPath = System.getProperty("user.home") + "/Desktop";
+        File destinoPasta = new File(desktopPath + "/imagensRestaurante");
+
+        if (!destinoPasta.exists()) {
+            destinoPasta.mkdirs();
         }
+
+        File nomeArquivo = new File(imagePath);
+        String apenasNomeArquivo = nomeArquivo.getName();
+        File destinoArquivo = new File(destinoPasta, apenasNomeArquivo);
+        java.nio.file.Files.copy(nomeArquivo.toPath(), destinoArquivo.toPath(), 
+                                java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+
+        imagePath = destinoArquivo.getAbsolutePath();
+        i.setImagem(imagePath);
+
+
+        iDAO.inserir(i);
+        JOptionPane.showMessageDialog(null, "Item cadastrado com sucesso!", 
+                                      "Item Cadastrado", JOptionPane.INFORMATION_MESSAGE);
+        limparFormulario();
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Insira dados numéricos válidos!", 
+                                      "ERRO", JOptionPane.ERROR_MESSAGE);
+    } catch (java.nio.file.NoSuchFileException e) {
+        JOptionPane.showMessageDialog(null, "Arquivo de imagem não encontrado!", 
+                                      "ERRO", JOptionPane.ERROR_MESSAGE);
+    } catch (java.io.IOException e) {
+        JOptionPane.showMessageDialog(null, "Erro ao copiar o arquivo de imagem!", 
+                                      "ERRO", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Erro inesperado: " + e.getMessage(), 
+                                      "ERRO", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnEscolherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscolherActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+    
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de Imagem", "jpg", "jpeg", "png", "gif");
+    fileChooser.setFileFilter(filter);
+    
+    int result = fileChooser.showOpenDialog(this);
+    
+    if (result == JFileChooser.APPROVE_OPTION) {
+        try {
+            File selectedFile = fileChooser.getSelectedFile();
+            
+            String fileName = selectedFile.getName();
+            
+            BufferedImage img = ImageIO.read(selectedFile);
+            
+            int iconWidth = 24;
+            int iconHeight = 24;
+            
+            Image scaledImage = img.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(scaledImage);
+            
+            imageLabel.setIcon(scaledIcon);
+            imageLabel.setSize(iconWidth, iconHeight);
+            
+            imagePath = selectedFile.getAbsolutePath();
+            
+            lblNomeImagem.setText(fileName);
+            
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this,
+                "Erro ao carregar ou copiar a imagem: " + ex.getMessage(),
+                "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    }//GEN-LAST:event_btnEscolherActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,17 +327,19 @@ public class CadastrarItem extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEscolher;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cmbCategoria;
     private javax.swing.JComboBox<String> cmbStatus;
+    private javax.swing.JLabel imageLabel;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblImagem;
     private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblNomeImagem;
     private javax.swing.JLabel lblPreco;
     private javax.swing.JLabel lblQtdEstoque;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTextField txtImagem;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtPreco;
     private javax.swing.JTextField txtQtdEstoque;
