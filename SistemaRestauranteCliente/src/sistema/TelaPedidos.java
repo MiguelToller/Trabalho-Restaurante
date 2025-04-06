@@ -124,7 +124,7 @@ public class TelaPedidos extends javax.swing.JDialog {
                 }
             }
 
-            resumo.append("\nTotal: R$ ").append(String.format("%.2f", total));
+            resumo.append("\nTotal: R$ ").append(String.format("%.2f com os 10%% do garcom", total+(total*0.1)));
             JOptionPane.showMessageDialog(this, resumo.toString());
             
             Socket s3 = new Socket("localhost", 1234);

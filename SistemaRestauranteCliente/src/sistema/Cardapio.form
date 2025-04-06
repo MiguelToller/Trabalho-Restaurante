@@ -91,7 +91,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Cradapio"/>
+        <Property name="text" type="java.lang.String" value="Card&#xe1;pio"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="painelControles">
@@ -166,6 +166,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Meus Pedidos"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMeusPedidosActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

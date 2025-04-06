@@ -112,7 +112,7 @@ public class Cardapio extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblCardapio);
 
         lblCardapio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblCardapio.setText("Cradapio");
+        lblCardapio.setText("Cardápio");
 
         painelControles.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -125,6 +125,11 @@ public class Cardapio extends javax.swing.JFrame {
         btnVerCarrinho.setText("Ver Carrinho");
 
         btnMeusPedidos.setText("Meus Pedidos");
+        btnMeusPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMeusPedidosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout painelControlesLayout = new javax.swing.GroupLayout(painelControles);
         painelControles.setLayout(painelControlesLayout);
@@ -188,6 +193,38 @@ public class Cardapio extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnMeusPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeusPedidosActionPerformed
+        List<Item> itens = null;
+        
+        try {
+            // OBS: Mudar localhost Para o ip do pc (Servidor)
+            // Conecta ao servidor
+            Socket socket = new Socket("localhost", 1234);
+            
+            // Cria streams para comunicação
+            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+            
+            // Envia comando para solicitar o cardápio
+            out.writeObject("LISTAR_PEDIDOS");
+            out.flush();
+            
+            // Recebe a lista de itens
+            itens = (List<Item>) in.readObject();
+            
+            // Fecha os recursos
+            in.close();
+            out.close();
+            socket.close();
+            
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, 
+                    "Erro ao conectar com o servidor: " + e.getMessage(), 
+                    "Erro de Conexão", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnMeusPedidosActionPerformed
 
     // Método para buscar os itens do cardápio no servidor
     private List<Item> buscarCardapio() {
