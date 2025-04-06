@@ -1,7 +1,7 @@
 
 # Cadastro de Produto com Interface Gráfica (Java Swing + MySQL)
 
-Este projeto é um exemplo didático utilizado na disciplina de **Projeto de Software**, com o objetivo de demonstrar um Sistema de Pedidos de um restaurante, destacando a interação entre o **Diagrama de Classes** e o **Diagrama de Sequência**.
+Este projeto é um exemplo didático desenvolvido na disciplina de **Projeto de Software**, com o objetivo de demonstrar a implementação de um sistema de pedidos para restaurante. O projeto enfatiza a utilização de **diagramas UML**, especialmente **Diagrama de Classes** e **Diagrama de Sequência**, integrados ao desenvolvimento com Java Swing e persistência em banco de dados MySQL.
 
 ---
 
@@ -17,15 +17,17 @@ Este projeto é um exemplo didático utilizado na disciplina de **Projeto de Sof
 ## Funcionalidades Cliente
 
 - Adicionar itens ao carrinho
-- Ver Pedidos
-- Ver carrinho
+- Realiza Pedidos
+- Finaliza Pedidos
+- Remove Itens do Carrinho
     
 ---
 
 ## Diagrama de Classes Administrador
 
-O diagrama de classes ilustra a estrutura do sistema, com a classe `Item` representando os produtos, e a classe `ItemDAO` sendo responsável pela persistência dos dados no banco. 
-As classes `CadastrarItemForm`, `EditarItemForm`, `ExcluirItemForm` e `VerPedidosForm` representam as interfaces gráficas que interagem com o usuário.
+O diagrama de classes representa a estrutura do sistema, onde a classe `Item` modela os produtos e a classe `Pedido` representa os pedidos realizados.  
+As classes `ItemDAO` e `PedidoDAO` são responsáveis pela persistência desses dados no banco de dados.  
+Já as interfaces gráficas `CadastrarItemForm`, `EditarItemForm`, `ExcluirItemForm` e `VerPedidosForm` possibilitam a interação do administrador com o sistema.
 
 ### Cadastrar Item
 
@@ -50,8 +52,7 @@ As classes `CadastrarItemForm`, `EditarItemForm`, `ExcluirItemForm` e `VerPedido
 
 ## Diagrama de Classes Cliente
 
-O diagrama de classes ilustra a estrutura do sistema, com a classe `Item` representando os produtos, e a classe `ItemDAO` sendo responsável pela persistência dos dados no banco. 
-As classes `Cardapio.form`, `TelaCarrinho.form` e `TelaPedidos.form` representam as interfaces gráficas que interagem com o usuário.
+Descricao:
 
 ### Cliente
 
@@ -80,7 +81,7 @@ O diagrama de sequência descreve a interação entre os objetos ao longo do tem
 
 ## Diagrama de Sequência Cliente
 
-O diagrama de sequência descreve a interação entre os objetos ao longo do tempo, detalhando como as solicitações de cadastro, edição e exclusão de produtos fluem no sistema.
+O diagrama de sequência descreve a interação entre os objetos ao longo do tempo, detalhando como é adicionado itens ao carrinho, realização de pedidos, finalização de pedidos e remoção de itens do carrinho.
 
 ### Adicionar Itens ao Carrinho
 
@@ -98,14 +99,9 @@ O diagrama de sequência descreve a interação entre os objetos ao longo do tem
 
 ![DS - Finalizar Pedidos](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/Cliente/FinalizarPedidos.png)
 
-
-### Ver Pedidos
-
-![DS - Ver Pedidos]
-
 ---
 
-## Remover Item do Carrinho
+### Remover Item do Carrinho
 
 ![DCS - Remover Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/Cliente/RemoverItem.png)
 
