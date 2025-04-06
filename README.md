@@ -25,9 +25,8 @@ Este projeto é um exemplo didático desenvolvido na disciplina de **Projeto de 
 
 ## Diagrama de Classes Administrador
 
-O diagrama de classes representa a estrutura do sistema, onde a classe `Item` modela os produtos e a classe `Pedido` representa os pedidos realizados.  
-As classes `ItemDAO` e `PedidoDAO` são responsáveis pela persistência desses dados no banco de dados.  
-Já as interfaces gráficas `CadastrarItemForm`, `EditarItemForm`, `ExcluirItemForm` e `VerPedidosForm` possibilitam a interação do administrador com o sistema.
+Este diagrama representa a estrutura das funcionalidades voltadas ao Administrador, onde a classe `Item` modela os produtos e a classe `Pedido` representa os pedidos realizados. 
+As classes `ItemDAO` e `PedidoDAO` são responsáveis pela persistência desses dados no banco de dados.  Já as interfaces gráficas `CadastrarItemForm`, `EditarItemForm`, `ExcluirItemForm` e `VerPedidosForm` possibilitam a interação do administrador com o sistema.
 
 ### Cadastrar Item
 
@@ -52,7 +51,7 @@ Já as interfaces gráficas `CadastrarItemForm`, `EditarItemForm`, `ExcluirItemF
 
 ## Diagrama de Classes Cliente
 
-Descricao:
+Este diagrama representa a estrutura das funcionalidades voltadas ao cliente, como visualização do cardápio, carrinho de compras e realização de pedidos.
 
 ### Cliente
 
@@ -61,7 +60,7 @@ Descricao:
 
 ## Diagrama de Sequência Administrador
 
-O diagrama de sequência descreve a interação entre os objetos ao longo do tempo, detalhando como as solicitações de cadastro, edição e exclusão de produtos fluem no sistema.
+Estes diagramas mostram a interação entre os objetos para as ações do Administrador, nas funcionalidades de cadastro, edição, exclusão e visualização de pedidos.
 
 ### Cadastrar Item
 
@@ -87,7 +86,7 @@ O diagrama de sequência descreve a interação entre os objetos ao longo do tem
 
 ## Diagrama de Sequência Cliente
 
-O diagrama de sequência descreve a interação entre os objetos ao longo do tempo, detalhando como é adicionado itens ao carrinho, realização de pedidos, finalização de pedidos e remoção de itens do carrinho.
+Estes diagramas mostram a interação entre os objetos para as ações do cliente, como adicionar e remover itens do carrinho, realizar e finalizar pedidos.
 
 ### Adicionar Itens ao Carrinho
 
@@ -117,15 +116,22 @@ O diagrama de sequência descreve a interação entre os objetos ao longo do tem
 
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/seu-usuario/cadastro-produto-java.git
+   git clone https://github.com/MiguelToller/Trabalho-Restaurante.git
    ```
-2. Compile os arquivos `.java`:
-   ```bash
-   javac *.java
+2. Crie o Banco MySQL e adicione o ``Banco.txt``.
+
+3. Altere (se necessário) a versão do JDK de acordo com sua máquina
+
+4. Adicione o mysql-connector em Libraries
+
+5. Execute o Servidor:
+    ```bash
+   Server.java
    ```
-3. Execute a interface gráfica:
+6. Execute a interface gráfica:
    ```bash
-   java ProdutoForm
+   menuADM.form (Administrador)
+   Cardapio.form (Cliente)
    ```
 
 ---
@@ -147,6 +153,8 @@ O diagrama de sequência descreve a interação entre os objetos ao longo do tem
 │   ├───Diagramas Classe
 │   ├───Diagramas Extra
 │   └───Diagramas Sequencia
+│       ├───Admin
+│       └───Cliente
 ├───SistemaRestaurante
 │   ├───build
 │   │   └───classes
@@ -166,7 +174,10 @@ O diagrama de sequência descreve a interação entre os objetos ao longo do tem
     ├───nbproject
     │   └───private
     └───src
-        └───sistemarestaurantecliente
+        ├───Conexao
+        ├───dao
+        ├───model
+        └───sistema
 ```
 
 ---
