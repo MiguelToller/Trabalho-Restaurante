@@ -16,6 +16,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
  import java.util.UUID;
+import javax.swing.table.TableCellRenderer;
+
 
 /**
  *
@@ -27,6 +29,7 @@ public class Cardapio extends javax.swing.JFrame {
     private List<Item> listaItens;
     private String uuidCliente;
     
+    
     /**
      * Creates new form Cardapio
      */
@@ -35,6 +38,7 @@ public class Cardapio extends javax.swing.JFrame {
         System.out.println("UUID da sessão do cliente: " + uuidCliente);
         
         initComponents();
+        personalizarTabela();
         tableModel = (DefaultTableModel) tblCardapio.getModel();
         carrinho = new Carrinho();
         this.listaItens = new ArrayList<>();
@@ -67,6 +71,28 @@ public class Cardapio extends javax.swing.JFrame {
         
         // Centralizar a janela
         //setLocationRelativeTo(null);
+    }
+    
+    private void personalizarTabela() {
+        tblCardapio.getColumnModel().getColumn(2).setCellRenderer(new TableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                    boolean isSelected, boolean hasFocus, int row, int column) {
+                JLabel label = new JLabel();
+                if (value != null) {
+                    try {
+                        ImageIcon icon = new ImageIcon(value.toString());
+                        Image img = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                        label.setIcon(new ImageIcon(img));
+                    } catch (Exception e) {
+                        label.setText("Erro ao carregar");
+                    }
+                }
+                label.setHorizontalAlignment(JLabel.CENTER);
+                return label;
+            }
+        });
+
     }
     
     /**
@@ -274,7 +300,8 @@ public class Cardapio extends javax.swing.JFrame {
                 Object[] linha = {
                     item.getId(),
                     item.getNome(),
-                    String.format("R$ %.2f", item.getPreco())
+                    String.format("R$ %.2f", item.getPreco()),
+                    item.getImagem()
                 };
                 tableModel.addRow(linha);
             }
