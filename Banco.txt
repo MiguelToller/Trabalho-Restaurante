@@ -19,17 +19,19 @@ CREATE TABLE Carrinho (
 );
 
 CREATE TABLE Pedido (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `valorTotal` DECIMAL(10,2) NOT NULL,
-  `idCarrinho` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_Pedido_Carrinho`
-    FOREIGN KEY (`idCarrinho`)
-    REFERENCES `Carrinho` (`id`)
+  id INT NOT NULL AUTO_INCREMENT,
+  valorTotal DECIMAL(10,2) NOT NULL,
+  idCarrinho INT NOT NULL,
+  uuidCliente VARCHAR(36),
+  status VARCHAR(20) DEFAULT 'Em andamento',
+  PRIMARY KEY (id),
+  CONSTRAINT fk_pedido_carrinho
+    FOREIGN KEY (idCarrinho)
+    REFERENCES Carrinho(id)
 );
 
 CREATE TABLE ItemCarrinho (
-  `itemCarrinhoId` INT NOT NULL,
+  `itemCarrinhoId` INT NOT NULL AUTO_INCREMENT,
   `idItem` INT UNSIGNED NOT NULL,
   `idCarrinho` INT NOT NULL,
   `qtdItem` INT NOT NULL,
@@ -41,3 +43,11 @@ CREATE TABLE ItemCarrinho (
     FOREIGN KEY (`idCarrinho`)
     REFERENCES `Carrinho` (`id`)
 );
+
+ALTER TABLE itemcarrinho
+DROP FOREIGN KEY fk_Item_Carrinho_ItemId;
+
+ALTER TABLE itemcarrinho
+ADD CONSTRAINT fk_Item_Carrinho_ItemId
+FOREIGN KEY (idItem) REFERENCES item(id)
+ON DELETE CASCADE;
