@@ -79,6 +79,12 @@ O diagrama de sequência descreve a interação entre os objetos ao longo do tem
 
 ---
 
+### Ver Pedidos
+
+![DS - Ver Pedidos](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/Admin/VerPedidos%20Sequencia.png)
+
+---
+
 ## Diagrama de Sequência Cliente
 
 O diagrama de sequência descreve a interação entre os objetos ao longo do tempo, detalhando como é adicionado itens ao carrinho, realização de pedidos, finalização de pedidos e remoção de itens do carrinho.
