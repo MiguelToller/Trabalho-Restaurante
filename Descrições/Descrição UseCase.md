@@ -102,9 +102,6 @@ O pedido é finalizado e o pagamento pode ser processado.
 
 ### **Branch-sequence**  
 - Se o cliente desejar revisar o valor antes do pagamento, ele pode visualizar o resumo da conta antes de prosseguir.
-
-### **Exception-sequence**  
-- Se o pagamento não for concluído, o sistema mantém o pedido pendente até a quitação.
   
 ### **Nota**  
 Após a confirmação, Adicionar 10% ao valor total para o garçom. O cliente pode ou não pagar esses 10%.  
@@ -153,12 +150,9 @@ As informações do item são atualizadas no menu.
 5. O administrador confirma a alteração.  
 6. O sistema salva as modificações no menu.  
 
-### **Exception-sequence**  
-- Se o item não existir ou não puder ser editado, o sistema exibe um erro.  
-
 ---
 
-## **7. Ativar/Desativar Itens**
+## **7. Excluir Itens**
 
 ### **Ator**  
 Administrador/Gerente 
@@ -167,19 +161,12 @@ Administrador/Gerente
 O sistema deve ter pelo menos um item cadastrado no menu.  
 
 ### **Pós-condição**  
-O item é ativado ou desativado, alterando sua disponibilidade para os clientes.  
+O item é excluído.
 
 ### **Base-sequence**  
 1. O administrador acessa a opção de gerenciar o menu.  
 2. O administrador seleciona um item existente.  
-3. O sistema exibe o status atual do item (ativo/inativo).  
-4. O administrador altera o status do item (ativar/desativar).  
-5. O sistema salva a alteração.  
-
-### **Branch-sequence**  
-- Se um item for desativado, ele não poderá mais ser adicionado ao carrinho dos clientes.  
-
-### **Exception-sequence**  
-- Se o item não existir, o sistema exibe um erro.  
+3. O administrador clica em excluir item.
+4. O sistema salva a alteração.  
 
 ---
