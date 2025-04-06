@@ -41,8 +41,3 @@ CREATE TABLE ItemCarrinho (
     FOREIGN KEY (`idCarrinho`)
     REFERENCES `Carrinho` (`id`)
 );
-
-truncate table item;
-delete from item
-where status = 0;
-select * from item;
