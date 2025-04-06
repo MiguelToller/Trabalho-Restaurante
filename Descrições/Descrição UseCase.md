@@ -53,7 +53,7 @@ O carrinho pode ser modificado até que o cliente confirme o pedido.
 
 ---
 
-## **3. Confirmar Pedido**  
+## **3. Fazer Pedido**  
 
 ### **Ator**  
 Cliente  
@@ -65,24 +65,20 @@ O cliente deve ter um carrinho ativo com pelo menos um item.
 O pedido é registrado no sistema e não pode mais ser alterado.  
 
 ### **Base-sequence**  
-1. O cliente acessa a opção de "Confirmar Pedido".  
+1. O cliente acessa a opção de "Fazer Pedido".  
 2. O sistema exibe um resumo do carrinho.  
 3. O cliente confirma o pedido.  
-4. O sistema registra o pedido como definitivo.
-5. [Include] Emitir Ticket: O sistema emite o ticket com todos os itens no pedido e o valor total a pagar.
-
-### **Branch-sequence**  
-- Se o cliente quiser voltar atrás antes de confirmar, ele pode cancelar a ação.  
+4. [Include] Emitir Ticket: O sistema emite o ticket com todos os itens no pedido e o valor total a pagar.
 
 ### **Exception-sequence**  
 - Se o carrinho estiver vazio, o sistema impede a confirmação e exibe uma mensagem de erro.  
 
 ### **Nota**  
-Após a confirmação, o pedido não pode mais ser alterado, apenas cancelado ou finalizado.  
+Após a confirmação, o pedido não pode mais ser alterado, apenas finalizado.  
 
 ---
 
-## **4. Pedir Conta (Encerrar Pedido)**  
+## **4. Finalizar Pedidos**  
 
 ### **Ator**  
 Cliente  
@@ -94,7 +90,7 @@ O cliente deve ter um pedido confirmado.
 O pedido é finalizado e o pagamento pode ser processado.  
 
 ### **Base-sequence**  
-1. O cliente solicita a conta.  
+1. O cliente finaliza o pedido.  
 2. O sistema calcula o valor total do pedido.  
 3. O sistema exibe o valor. 
 4. O cliente realiza o pagamento.  
@@ -104,7 +100,7 @@ O pedido é finalizado e o pagamento pode ser processado.
 - Se o cliente desejar revisar o valor antes do pagamento, ele pode visualizar o resumo da conta antes de prosseguir.
   
 ### **Nota**  
-Após a confirmação, Adicionar 10% ao valor total para o garçom. O cliente pode ou não pagar esses 10%.  
+Após a confirmação, Adicionar 10% ao valor total para o garçom.
 
 ---
 
@@ -120,7 +116,7 @@ O sistema deve estar disponível para edição do menu.
 O novo item é adicionado ao menu e fica disponível para os clientes.  
 
 ### **Base-sequence**  
-1. O administrador acessa a opção de gerenciar o menu.  
+1. O administrador acessa o menu do administrador.
 2. O administrador seleciona "Cadastrar Item".  
 3. O sistema solicita informações do novo item (nome, descrição, preço, etc.).  
 4. O administrador insere os dados e confirma.  
@@ -143,7 +139,7 @@ O sistema deve ter pelo menos um item cadastrado no menu.
 As informações do item são atualizadas no menu.  
 
 ### **Base-sequence**  
-1. O administrador acessa a opção de gerenciar o menu.  
+1. O administrador acessa o menu do administrador.
 2. O administrador escolhe um item existente.  
 3. O sistema exibe as informações do item.  
 4. O administrador altera os dados conforme necessário.  
@@ -164,7 +160,7 @@ O sistema deve ter pelo menos um item cadastrado no menu.
 O item é excluído.
 
 ### **Base-sequence**  
-1. O administrador acessa a opção de gerenciar o menu.  
+1. O administrador acessa o menu do administrador.  
 2. O administrador seleciona um item existente.  
 3. O administrador clica em excluir item.
 4. O sistema salva a alteração.  
