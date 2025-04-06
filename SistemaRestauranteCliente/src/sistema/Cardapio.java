@@ -31,6 +31,9 @@ public class Cardapio extends javax.swing.JFrame {
      * Creates new form Cardapio
      */
     public Cardapio() {
+        MenuPrincipal menuP = new MenuPrincipal();
+        menuP.dispose();
+        
         this.uuidCliente = UUID.randomUUID().toString();
         System.out.println("UUID da sessão do cliente: " + uuidCliente);
         
@@ -88,7 +91,7 @@ public class Cardapio extends javax.swing.JFrame {
         btnVerCarrinho = new javax.swing.JButton();
         btnMeusPedidos = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Cardapio");
         setLocation(new java.awt.Point(0, 0));
 
@@ -195,35 +198,38 @@ public class Cardapio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMeusPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMeusPedidosActionPerformed
-        List<Item> itens = null;
+//        List<Item> itens = null;
+//        
+//        try {
+//            // OBS: Mudar localhost Para o ip do pc (Servidor)
+//            // Conecta ao servidor
+//            Socket socket = new Socket("localhost", 1234);
+//            
+//            // Cria streams para comunicação
+//            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+//            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+//            
+//            // Envia comando para solicitar o cardápio
+//            out.writeObject("LISTAR_PEDIDOS");
+//            out.flush();
+//            
+//            // Recebe a lista de itens
+//            itens = (List<Item>) in.readObject();
+//            
+//            // Fecha os recursos
+//            in.close();
+//            out.close();
+//            socket.close();
+//            
+//        } catch (IOException | ClassNotFoundException e) {
+//            e.printStackTrace();
+//            JOptionPane.showMessageDialog(this, 
+//                    "Erro ao conectar com o servidor: " + e.getMessage(), 
+//                    "Erro de Conexão", JOptionPane.ERROR_MESSAGE);
+//        }
+//        
+//      
         
-        try {
-            // OBS: Mudar localhost Para o ip do pc (Servidor)
-            // Conecta ao servidor
-            Socket socket = new Socket("localhost", 1234);
-            
-            // Cria streams para comunicação
-            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-            
-            // Envia comando para solicitar o cardápio
-            out.writeObject("LISTAR_PEDIDOS");
-            out.flush();
-            
-            // Recebe a lista de itens
-            itens = (List<Item>) in.readObject();
-            
-            // Fecha os recursos
-            in.close();
-            out.close();
-            socket.close();
-            
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, 
-                    "Erro ao conectar com o servidor: " + e.getMessage(), 
-                    "Erro de Conexão", JOptionPane.ERROR_MESSAGE);
-        }
     }//GEN-LAST:event_btnMeusPedidosActionPerformed
 
     // Método para buscar os itens do cardápio no servidor

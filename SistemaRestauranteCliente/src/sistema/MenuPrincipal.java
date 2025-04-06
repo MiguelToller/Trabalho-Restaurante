@@ -29,7 +29,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
         btnAbrirCardapio = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         lblTitulo.setText("Menu Principal");
 
