@@ -8,7 +8,7 @@ import model.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -74,25 +74,49 @@ public class Cardapio extends javax.swing.JFrame {
     }
     
     private void personalizarTabela() {
-        tblCardapio.getColumnModel().getColumn(2).setCellRenderer(new TableCellRenderer() {
+        tblCardapio.getColumnModel().getColumn(3).setCellRenderer(new TableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
                     boolean isSelected, boolean hasFocus, int row, int column) {
+
                 JLabel label = new JLabel();
-                if (value != null) {
-                    try {
-                        ImageIcon icon = new ImageIcon(value.toString());
-                        Image img = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-                        label.setIcon(new ImageIcon(img));
-                    } catch (Exception e) {
-                        label.setText("Erro ao carregar");
-                    }
-                }
                 label.setHorizontalAlignment(JLabel.CENTER);
+                label.setVerticalAlignment(JLabel.CENTER);
+
+                if (value != null) {
+                    String caminho = value.toString().replace("\\", File.separator);
+                    File arquivoImagem = new File(caminho);
+
+                    if (arquivoImagem.exists()) {
+                        try {
+                            ImageIcon imagem = new ImageIcon(arquivoImagem.getAbsolutePath());
+
+                            // Pega tamanho da célula
+                            int largura = table.getColumnModel().getColumn(column).getWidth();
+                            int altura = table.getRowHeight(row);
+
+                            // Redimensiona a imagem proporcionalmente
+                            Image imgRedimensionada = imagem.getImage().getScaledInstance(
+                                    largura - 10, altura - 5, Image.SCALE_SMOOTH);
+
+                            label.setIcon(new ImageIcon(imgRedimensionada));
+                            label.setText("");
+                        } catch (Exception e) {
+                            label.setText("Erro");
+                        }
+                    } else {
+                        label.setText("N/A");
+                    }
+                } else {
+                    label.setText("N/A");
+                }
+
                 return label;
             }
         });
 
+        // Aumenta a altura das linhas para caber melhor as imagens
+        tblCardapio.setRowHeight(60);
     }
     
     /**

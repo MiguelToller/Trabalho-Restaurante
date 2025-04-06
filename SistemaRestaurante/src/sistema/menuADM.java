@@ -26,18 +26,21 @@ public class menuADM extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblMenuRestaurante = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuCadastrarADM = new javax.swing.JMenu();
         itemCadastrarADM = new javax.swing.JMenuItem();
         menuEditarADM = new javax.swing.JMenu();
         itemEditarADM = new javax.swing.JMenuItem();
         itemExcluirADM = new javax.swing.JMenuItem();
+        menuVerPedidosADM = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ADMINISTRADOR");
 
-        jLabel1.setText("EM PROCESSO");
+        lblMenuRestaurante.setFont(new java.awt.Font("Segoe UI Black", 2, 18)); // NOI18N
+        lblMenuRestaurante.setText("MENU RESTAURANTE");
 
         menuCadastrarADM.setText("Cadastrar");
 
@@ -71,6 +74,18 @@ public class menuADM extends javax.swing.JFrame {
 
         jMenuBar1.add(menuEditarADM);
 
+        menuVerPedidosADM.setText("Ver Pedidos");
+
+        jMenuItem1.setText("Visualizar Pedidos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuVerPedidosADM.add(jMenuItem1);
+
+        jMenuBar1.add(menuVerPedidosADM);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -78,16 +93,16 @@ public class menuADM extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addComponent(jLabel1)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addGap(88, 88, 88)
+                .addComponent(lblMenuRestaurante)
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(jLabel1)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(lblMenuRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -107,6 +122,11 @@ public class menuADM extends javax.swing.JFrame {
         ExcluirItem excluirADM = new ExcluirItem();
         excluirADM.setVisible(true);
     }//GEN-LAST:event_itemExcluirADMActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        VerPedidos verPedidosADM = new VerPedidos();
+        verPedidosADM.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,9 +167,11 @@ public class menuADM extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemCadastrarADM;
     private javax.swing.JMenuItem itemEditarADM;
     private javax.swing.JMenuItem itemExcluirADM;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JLabel lblMenuRestaurante;
     private javax.swing.JMenu menuCadastrarADM;
     private javax.swing.JMenu menuEditarADM;
+    private javax.swing.JMenu menuVerPedidosADM;
     // End of variables declaration//GEN-END:variables
 }
