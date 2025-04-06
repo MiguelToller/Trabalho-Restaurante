@@ -25,7 +25,7 @@ Este projeto é um exemplo didático utilizado na disciplina de **Projeto de Sof
 ## Diagrama de Classes Administrador
 
 O diagrama de classes ilustra a estrutura do sistema, com a classe `Item` representando os produtos, e a classe `ItemDAO` sendo responsável pela persistência dos dados no banco. 
-As classes `CadastrarItemForm`, `EditarItemForm` e `ExcluirItemForm` representam as interfaces gráficas que interagem com o usuário.
+As classes `CadastrarItemForm`, `EditarItemForm`, `ExcluirItemForm` e `VerPedidosForm` representam as interfaces gráficas que interagem com o usuário.
 
 ### Cadastrar Item
 
@@ -44,7 +44,7 @@ As classes `CadastrarItemForm`, `EditarItemForm` e `ExcluirItemForm` representam
 ---
 ### Ver Pedidos
 
-Ver pedidos
+![C - Ver pedidos](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Classe/VerPedidos%20Diagram.png)
 
 ---
 
@@ -53,15 +53,9 @@ Ver pedidos
 O diagrama de classes ilustra a estrutura do sistema, com a classe `Item` representando os produtos, e a classe `ItemDAO` sendo responsável pela persistência dos dados no banco. 
 As classes `Cardapio.form`, `TelaCarrinho.form` e `TelaPedidos.form` representam as interfaces gráficas que interagem com o usuário.
 
-### Adicionar Item Carrinho
+### Cliente
 
----
-### Ver Pedidos
-
----
-### Ver Carrinho
-
----
+![C - Cliente](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Classe/Cliente%20Diagram.png)
 
 
 ## Diagrama de Sequência Administrador
@@ -70,17 +64,17 @@ O diagrama de sequência descreve a interação entre os objetos ao longo do tem
 
 ### Cadastrar Item
 
-![DS - Cadastrar Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/CadastrarItem%20Sequencia.png)
+![DS - Cadastrar Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/Admin/CadastrarItem%20Sequencia.png)
 
 ---
 ### Editar Item
 
-![DS - Editar Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/EditarItem%20Sequencia.png)
+![DS - Editar Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/Admin/EditarItem%20Sequencia.png)
 
 ---
 ### Excluir Item
 
-![DS - Excluir Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/ExcluirItem%20Sequencia.png)
+![DS - Excluir Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/Admin/ExcluirItem%20Sequencia.png)
 
 ---
 
@@ -90,39 +84,30 @@ O diagrama de sequência descreve a interação entre os objetos ao longo do tem
 
 ### Adicionar Itens ao Carrinho
 
-![DS - Adicionar Item]
+![DS - Adicionar Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/Cliente/AdicionarItem.png)
 
 ---
 
-### Ver Carrinho
+### Fazer Pedido
 
-![DS - Ver Carrinho]
-- remover item
-  - BRANCH: nao tem item
-- finalizar pedido
-  - BRANCH: nao tem pedido
-- voltar ao cardapio
+![DS - Fazer Pedido](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/Cliente/FazerPedido.png)
 
 ---
 
-### Finalizar Pedido
+### Finalizar Pedidos
 
-![DS - Finalizar Pedido]
-- voltar ao cardapio
-- BRANCH: nao tem pedido
+![DS - Finalizar Pedidos](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/Cliente/FinalizarPedidos.png)
 
 
 ### Ver Pedidos
 
 ![DS - Ver Pedidos]
-- finalizar todos os pedidos
 
 ---
 
-## Casos de Uso
+## Remover Item do Carrinho
 
-
-![DCS - Casos de Uso](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Extra/Diagrama%20UseCase.png)
+![DCS - Remover Item](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Sequencia/Cliente/RemoverItem.png)
 
 ---
 
