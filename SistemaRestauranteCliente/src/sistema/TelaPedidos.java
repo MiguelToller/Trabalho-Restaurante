@@ -17,6 +17,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.ItemCarrinho;
 import model.Pedido;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  *
@@ -126,6 +129,22 @@ public class TelaPedidos extends javax.swing.JDialog {
 
             resumo.append("\nTotal: R$ ").append(String.format("%.2f com os 10%% do garcom", total+(total*0.1)));
             JOptionPane.showMessageDialog(this, resumo.toString());
+            
+            try {
+                String desktopPath = System.getProperty("user.home") + "/Desktop";
+                
+                File conta = new File(desktopPath + "/conta.txt");
+                
+                FileWriter writer = new FileWriter(conta);
+                writer.write(resumo.toString());
+            
+                writer.close();
+            
+                System.out.println("Arquivo criado com sucesso na área de trabalho!");
+            
+            } catch (IOException e) {
+                System.out.println("Ocorreu um erro ao criar o arquivo: " + e.getMessage());
+            }
             
             Socket s3 = new Socket("localhost", 1234);
             ObjectOutputStream out3 = new ObjectOutputStream(s3.getOutputStream());
