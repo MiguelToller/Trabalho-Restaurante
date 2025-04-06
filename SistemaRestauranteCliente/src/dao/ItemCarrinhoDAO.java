@@ -128,49 +128,4 @@ public class ItemCarrinhoDAO {
             System.out.println("Erro ao excluir item do carrinho: " + ex.getMessage());
         }
     }
-    
-    public List<ItemCarrinho> listarPorPedido(int idPedido) {
-        List<ItemCarrinho> lista = new ArrayList<>();
-        String sql = "SELECT * FROM itemcarrinho WHERE idCarrinho = ?";
-
-        try (PreparedStatement ps = this.conn.prepareStatement(sql)) {
-            ps.setInt(1, idPedido);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                ItemCarrinho ic = new ItemCarrinho();
-                ic.setItemCarrinhoId(rs.getInt("itemCarrinhoId"));
-                ic.setQtdItem(rs.getInt("qtdItem"));
-
-                // Criando o objeto Item
-                Item item = new Item();
-                item.setId(rs.getInt("idItem"));
-
-                // Aqui você pode buscar o nome real do item usando ItemDAO, se quiser:
-                // ItemDAO itemDAO = new ItemDAO();
-                // Item itemCompleto = itemDAO.buscarPorId(item.getId());
-                // item.setNome(itemCompleto.getNome());
-
-                ic.setIdItem(item);
-
-                // Criando o objeto Carrinho
-                Carrinho carrinho = new Carrinho();
-                carrinho.setId(rs.getInt("idCarrinho"));
-                ic.setIdCarrinho(carrinho);
-
-                // Buscar nome do item
-                ItemDAO itemDAO = new ItemDAO();
-                Item itemCompleto = itemDAO.getItem(item.getId());
-                item.setNome(itemCompleto.getNome());
-                
-                lista.add(ic);
-            }
-
-            rs.close();
-        } catch (SQLException e) {
-            System.out.println("Erro ao listar itens do pedido: " + e.getMessage());
-        }
-
-        return lista;
-    }
 }

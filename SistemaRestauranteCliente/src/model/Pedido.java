@@ -16,7 +16,7 @@ public class Pedido implements Serializable{
     private double valorTotal;
     private Carrinho carrinho;
     private String uuidCliente;
-    private String status;
+        private String status;
 
     public String getStatus() {
         return status;
@@ -25,7 +25,7 @@ public class Pedido implements Serializable{
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
     public String getUuidCliente() {
         return uuidCliente;
     }
@@ -33,7 +33,7 @@ public class Pedido implements Serializable{
     public void setUuidCliente(String uuidCliente) {
         this.uuidCliente = uuidCliente;
     }
-
+       
     public int getId() {
         return id;
     }
