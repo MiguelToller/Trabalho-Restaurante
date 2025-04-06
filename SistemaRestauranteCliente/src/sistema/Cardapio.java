@@ -30,10 +30,7 @@ public class Cardapio extends javax.swing.JFrame {
     /**
      * Creates new form Cardapio
      */
-    public Cardapio() {
-        MenuPrincipal menuP = new MenuPrincipal();
-        menuP.dispose();
-        
+    public Cardapio() {        
         this.uuidCliente = UUID.randomUUID().toString();
         System.out.println("UUID da sessão do cliente: " + uuidCliente);
         

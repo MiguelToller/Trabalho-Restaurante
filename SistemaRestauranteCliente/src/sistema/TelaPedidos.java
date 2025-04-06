@@ -20,6 +20,9 @@ import model.Pedido;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 /**
  *
@@ -132,16 +135,21 @@ public class TelaPedidos extends javax.swing.JDialog {
             
             try {
                 String desktopPath = System.getProperty("user.home") + "/Desktop";
-                
-                File conta = new File(desktopPath + "/conta.txt");
-                
+
+                // Formata data e hora: exemplo -> 2025-04-04_22-35-01
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+                String dataHora = LocalDateTime.now().format(formatter);
+
+                // Gera nome do arquivo com data/hora e UUID
+                String nomeArquivo = "conta_" + dataHora + "_" + UUID.randomUUID().toString().substring(0, 8) + ".txt";
+                File conta = new File(desktopPath + "/" + nomeArquivo);
+
+                // Cria e escreve o conteúdo
                 FileWriter writer = new FileWriter(conta);
                 writer.write(resumo.toString());
-            
                 writer.close();
-            
-                System.out.println("Arquivo criado com sucesso na área de trabalho!");
-            
+
+                System.out.println("Arquivo criado com sucesso na área de trabalho: " + nomeArquivo);
             } catch (IOException e) {
                 System.out.println("Ocorreu um erro ao criar o arquivo: " + e.getMessage());
             }

@@ -65,11 +65,11 @@ public class TelaCarrinho extends javax.swing.JDialog {
         // Painel de botões
         JPanel painelBotoes = new JPanel();
         JButton btnRemover = new JButton("Remover Item");
-        JButton btnFinalizar = new JButton("Finalizar Pedido");
+        JButton btnFazer = new JButton("Fazer Pedido");
         JButton btnVoltar = new JButton("Voltar ao Cardápio");
         
         painelBotoes.add(btnRemover);
-        painelBotoes.add(btnFinalizar);
+        painelBotoes.add(btnFazer);
         painelBotoes.add(btnVoltar);
         
         // Painel de total
@@ -88,7 +88,7 @@ public class TelaCarrinho extends javax.swing.JDialog {
         
         // Ações dos botões
         btnRemover.addActionListener(e -> removerItem());
-        btnFinalizar.addActionListener(e -> finalizarPedido());
+        btnFazer.addActionListener(e -> finalizarPedido());
         btnVoltar.addActionListener(e -> dispose());
         
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
