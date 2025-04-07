@@ -48,15 +48,12 @@ Os itens selecionados são adicionados ao carrinho do cliente.
 3. O cliente adiciona os itens ao carrinho.  
 4. O sistema registra os itens no carrinho.  
 
-### **Branch-sequence**  
+### **Nota**  
 - O cliente pode continuar adicionando itens antes de confirmar o pedido.  
-
-### **Exception-sequence**  
-- Se não houver itens ativos no menu, o sistema exibe uma mensagem de erro.  
 
 ---
 
-## **2. Alterar Carrinho**  
+## **2. Remover Itens do Carrinho**  
 
 ### **Ator**  
 Cliente  
@@ -69,15 +66,9 @@ O carrinho do cliente é atualizado no sistema.
 
 ### **Base-sequence**  
 1. O cliente acessa o carrinho.  
-2. O cliente escolhe modificar o carrinho.  
-3. O cliente adiciona ou remove itens.  
-4. O sistema registra a alteração no carrinho.  
-
-### **Branch-sequence**  
-- Se o cliente quiser desfazer a alteração, ele pode cancelar antes de salvar.  
-
-### **Exception-sequence**  
-- Se o item removido não estiver no carrinho, o sistema exibe uma mensagem de erro.  
+2. O cliente escolhe remover item.  
+3. O cliente remove itens.  
+4. O sistema registra a alteração no carrinho.   
 
 ### **Nota**  
 O carrinho pode ser modificado até que o cliente confirme o pedido.  
@@ -99,7 +90,6 @@ O pedido é registrado no sistema e não pode mais ser alterado.
 1. O cliente acessa a opção de "Fazer Pedido".  
 2. O sistema exibe um resumo do carrinho.  
 3. O cliente confirma o pedido.  
-4. [Include] Emitir Ticket: O sistema emite o ticket com todos os itens no pedido e o valor total a pagar.
 
 ### **Exception-sequence**  
 - Se o carrinho estiver vazio, o sistema impede a confirmação e exibe uma mensagem de erro.  
@@ -125,10 +115,8 @@ O pedido é finalizado e o pagamento pode ser processado.
 2. O sistema calcula o valor total do pedido.  
 3. O sistema exibe o valor. 
 4. O cliente realiza o pagamento.  
-5. O sistema registra o encerramento do pedido.  
-
-### **Branch-sequence**  
-- Se o cliente desejar revisar o valor antes do pagamento, ele pode visualizar o resumo da conta antes de prosseguir.
+5. O sistema registra o encerramento do pedido.
+6. [Include] Emitir Ticket: O sistema emite o ticket com todos os itens no pedido e o valor total a pagar.
   
 ### **Nota**  
 Após a confirmação, Adicionar 10% ao valor total para o garçom.
