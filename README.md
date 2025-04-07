@@ -316,6 +316,8 @@ Estes diagramas mostram a interação entre os objetos para as ações do client
 
 4. Mudar o ip para conectar ao servidor
 
+5. Adicionar pasta de imagens
+
 6. Execute a interface gráfica:
    ```bash
    Cardapio.form (Cliente)
