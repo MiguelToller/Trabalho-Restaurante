@@ -6,6 +6,7 @@ package sistema;
 
 import dao.ItemDAO;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.Item;
 
@@ -21,6 +22,7 @@ public class ExcluirItem extends javax.swing.JFrame {
      * Creates new form ExcluirItem
      */
     public ExcluirItem() {
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         initComponents();
         preencherComboItens();
     }

@@ -8,6 +8,7 @@ import dao.ItemDAO;
 import java.io.File;
 import java.util.List;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import model.Item;
@@ -24,6 +25,7 @@ public class EditarItem extends javax.swing.JFrame {
      * Creates new form EditarItem2
      */
     public EditarItem() {
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         initComponents();
         preencherComboItens();
         

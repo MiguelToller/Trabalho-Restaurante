@@ -18,6 +18,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.NoSuchFileException;
+import javax.swing.JFrame;
 
 /**
  *
@@ -29,6 +30,7 @@ public class CadastrarItem extends javax.swing.JFrame {
      * Creates new form CadastrarItem
      */
     public CadastrarItem() {
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         initComponents();
     }
 
