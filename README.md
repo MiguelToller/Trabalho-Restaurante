@@ -275,7 +275,7 @@ Estes diagramas mostram a interação entre os objetos para as ações do client
 
 ---
 
-## Como Executar
+## Como Executar (Administrador)
 
 1. Clone este repositório:
    ```bash
@@ -294,9 +294,27 @@ Estes diagramas mostram a interação entre os objetos para as ações do client
 6. Execute a interface gráfica:
    ```bash
    menuADM.form (Administrador)
+   ```
+   
+---
+
+## Como Executar (Cliente)
+
+1. Clone este repositório:
+   ```bash
+   git clone https://github.com/MiguelToller/Trabalho-Restaurante.git
+   ```
+2. Altere (se necessário) a versão do JDK de acordo com sua máquina
+
+3. Adicione o mysql-connector em Libraries
+
+4. Mudar o ip para conectar ao servidor
+
+6. Execute a interface gráfica:
+   ```bash
    Cardapio.form (Cliente)
    ```
-
+   
 ---
 
 ## Objetivos Didáticos
