@@ -53,10 +53,9 @@ O menu deve estar disponível com itens ativos.
 Os itens selecionados são adicionados ao carrinho do cliente.  
 
 ### **Base-sequence**  
-1. O cliente acessa o menu.  
-2. O cliente seleciona um ou mais itens.  
-3. O cliente adiciona os itens ao carrinho.  
-4. O sistema registra os itens no carrinho.  
+1. O cliente seleciona um item.  
+2. O cliente adiciona os itens ao carrinho.  
+3. O sistema registra os itens no carrinho e exibe uma mensagem de confirmação.  
 
 ### **Nota**  
 O cliente pode continuar adicionando itens antes de confirmar o pedido.  
@@ -76,9 +75,8 @@ O carrinho do cliente é atualizado no sistema.
 
 ### **Base-sequence**  
 1. O cliente acessa o carrinho.  
-2. O cliente escolhe remover item.  
-3. O cliente remove itens.  
-4. O sistema registra a alteração no carrinho.
+2. O cliente seleciona um item e clica em remover item.  
+3. O sistema registra a alteração no carrinho e exibe uma mensagem de confirmação.
 
 ### **Branch-sequence**  
 Se o item para remover for null ele exibe uma mensagem de erro.
@@ -100,9 +98,11 @@ O cliente deve ter um carrinho ativo com pelo menos um item.
 O pedido é registrado no sistema e não pode mais ser alterado.  
 
 ### **Base-sequence**  
+1. O cliente acessa o carrinho.
 1. O cliente acessa a opção de "Fazer Pedido".  
 2. O sistema exibe um resumo do carrinho.  
-3. O cliente confirma o pedido.  
+3. O cliente confirma o pedido.
+4. O sistema exibe uma mensagem de confirmação.
 
 ### **Branch-sequence**  
 Se o carrinho estiver vazio, o sistema impede a confirmação e exibe uma mensagem de erro.  
@@ -124,12 +124,13 @@ O cliente deve ter um pedido confirmado.
 O pedido é finalizado e o pagamento pode ser processado.  
 
 ### **Base-sequence**  
-1. O cliente finaliza o pedido.  
-2. O sistema calcula o valor total do pedido.  
-3. O sistema exibe o valor. 
-4. O cliente realiza o pagamento.  
-5. O sistema registra o encerramento do pedido.
-6. [Include] Emitir Ticket: O sistema emite o ticket com todos os itens no pedido e o valor total a pagar.
+1. O cliente acessa a aba dos pedidos.
+2. O cliente clica em finalizar pedidos.
+3. O sistema calcula o valor total do pedido.  
+4. O sistema exibe o valor. 
+5. O cliente realiza o pagamento.  
+6. O sistema registra o encerramento do pedido.
+7. [Include] Emitir Ticket: O sistema emite o ticket com todos os itens no pedido e o valor total a pagar.
 
 ### **Branch-sequence**  
 Se o cliente não tiver feito nenhum pedido, o sistema exibe uma mensagem de erro.
@@ -155,7 +156,7 @@ O novo item é adicionado ao menu e fica disponível para os clientes.
 2. O administrador seleciona "Cadastrar Item".  
 3. O sistema solicita informações do novo item (nome, descrição, preço, etc.).  
 4. O administrador insere os dados e confirma.  
-5. O sistema adiciona o novo item ao menu.  
+5. O sistema adiciona o novo item ao menu e exibe uma mensagem de confirmação.  
 
 ### **Exception-sequence**  
 Se os dados inseridos forem inválidos ou estiverem incompletos, o sistema exibe um erro.  
@@ -179,7 +180,7 @@ As informações do item são atualizadas no menu.
 3. O sistema exibe as informações do item.  
 4. O administrador altera os dados conforme necessário.  
 5. O administrador confirma a alteração.  
-6. O sistema salva as modificações no menu.  
+6. O sistema salva as modificações no menu e exibe uma mensagem de confirmação.  
 
 ---
 
@@ -197,8 +198,20 @@ O item é excluído.
 ### **Base-sequence**  
 1. O administrador acessa o menu do administrador.  
 2. O administrador seleciona um item existente.  
-3. O administrador clica em excluir item.
-4. O sistema salva a alteração.  
+3. O administrador clica em excluir item.  
+4. O sistema salva a alteração e exibe uma mensagem de confirmação.  
+
+---
+
+## **8. Ver Pedidos**
+
+### **Ator**  
+Administrador/Gerente 
+
+### **Base-sequence**  
+1. O administrador acessa o menu do administrador.  
+2. O administrador seleciona Ver Pedidos.
+3. o sistema exibe a tabela com os pedidos em andamento.
 
 ---
 
