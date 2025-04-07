@@ -33,11 +33,13 @@ O Diagrama de Domínio é uma representação conceitual que descreve as princip
 
 ## Diagrama de Caso de Uso
 
+O diagrama de casos de uso é uma ferramenta visual utilizada para representar as interações entre os atores e o sistema que está sendo modelado, destacando as funcionalidades que o sistema oferece.
+
 ![C - Caso de Uso](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Extra/Diagrama%20UseCase.png)
 
 ---
 
-# **Use Case Description**  
+# **Descrição do Caso de Uso**  
 
 ## **1. Adicionar itens ao Carrinho**  
 
