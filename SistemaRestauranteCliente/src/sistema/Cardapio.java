@@ -39,6 +39,7 @@ public class Cardapio extends javax.swing.JFrame {
         
         initComponents();
         personalizarTabela();
+        tblCardapio.setDefaultEditor(Object.class, null);
         tableModel = (DefaultTableModel) tblCardapio.getModel();
         carrinho = new Carrinho();
         this.listaItens = new ArrayList<>();
