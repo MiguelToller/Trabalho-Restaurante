@@ -59,7 +59,7 @@ Os itens selecionados são adicionados ao carrinho do cliente.
 4. O sistema registra os itens no carrinho.  
 
 ### **Nota**  
-- O cliente pode continuar adicionando itens antes de confirmar o pedido.  
+O cliente pode continuar adicionando itens antes de confirmar o pedido.  
 
 ---
 
