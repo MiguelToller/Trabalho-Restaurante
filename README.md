@@ -68,7 +68,10 @@ O carrinho do cliente é atualizado no sistema.
 1. O cliente acessa o carrinho.  
 2. O cliente escolhe remover item.  
 3. O cliente remove itens.  
-4. O sistema registra a alteração no carrinho.   
+4. O sistema registra a alteração no carrinho.
+
+### **Branch-sequence**  
+Se o item para remover for null ele exibe uma mensagem de erro.
 
 ### **Nota**  
 O carrinho pode ser modificado até que o cliente confirme o pedido.  
@@ -91,7 +94,7 @@ O pedido é registrado no sistema e não pode mais ser alterado.
 2. O sistema exibe um resumo do carrinho.  
 3. O cliente confirma o pedido.  
 
-### **Exception-sequence**  
+### **Branch-sequence**  
 - Se o carrinho estiver vazio, o sistema impede a confirmação e exibe uma mensagem de erro.  
 
 ### **Nota**  
@@ -117,7 +120,10 @@ O pedido é finalizado e o pagamento pode ser processado.
 4. O cliente realiza o pagamento.  
 5. O sistema registra o encerramento do pedido.
 6. [Include] Emitir Ticket: O sistema emite o ticket com todos os itens no pedido e o valor total a pagar.
-  
+
+### **Branch-sequence**  
+Se o cliente não tiver feito nenhum pedido, o sistema exibe uma mensagem de erro.
+
 ### **Nota**  
 Após a confirmação, Adicionar 10% ao valor total para o garçom.
 
