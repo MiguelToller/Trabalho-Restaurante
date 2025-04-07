@@ -45,10 +45,10 @@ public class ExcluirItem extends javax.swing.JFrame {
 
         lblTitulo = new javax.swing.JLabel();
         lblSubTitulo = new javax.swing.JLabel();
-        cmbItem = new javax.swing.JComboBox<String>();
+        cmbItem = new javax.swing.JComboBox<>();
         btnExcluir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblTitulo.setText("Excluir Item");
