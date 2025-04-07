@@ -23,6 +23,14 @@ Este projeto é um exemplo didático desenvolvido na disciplina de **Projeto de 
     
 ---
 
+## Diagrama de Domínio
+
+O Diagrama de Domínio é uma representação conceitual que descreve as principais entidades do sistema e seus relacionamentos.
+
+![C - Dominio](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Extra/Diagrama%20Classe.png)
+
+---
+
 ## Diagrama de Caso de Uso
 
 ![C - Caso de Uso](https://github.com/MiguelToller/Trabalho-Restaurante/blob/main/Diagramas/Diagramas%20Extra/Diagrama%20UseCase.png)
