@@ -105,7 +105,7 @@ O pedido é registrado no sistema e não pode mais ser alterado.
 3. O cliente confirma o pedido.  
 
 ### **Branch-sequence**  
-- Se o carrinho estiver vazio, o sistema impede a confirmação e exibe uma mensagem de erro.  
+Se o carrinho estiver vazio, o sistema impede a confirmação e exibe uma mensagem de erro.  
 
 ### **Nota**  
 Após a confirmação, o pedido não pode mais ser alterado, apenas finalizado.  
@@ -158,7 +158,7 @@ O novo item é adicionado ao menu e fica disponível para os clientes.
 5. O sistema adiciona o novo item ao menu.  
 
 ### **Exception-sequence**  
-- Se os dados inseridos forem inválidos ou estiverem incompletos, o sistema exibe um erro.  
+Se os dados inseridos forem inválidos ou estiverem incompletos, o sistema exibe um erro.  
 
 ---
 
